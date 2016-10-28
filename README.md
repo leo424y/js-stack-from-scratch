@@ -54,8 +54,6 @@
 
 [12 - 使用 Flow 进行类型检查](/tutorial/12-flow)
 
-Coming up: Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
-
 即将加入以下内容：部署/开发环境，Express，React 路由管理，服务端渲染，样式，React 测试工具 Enzyme，Git Hooks。
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
