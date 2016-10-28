@@ -1,4 +1,4 @@
-# JavaScript Stack from Scratch
+# 从零开始构建 JavaScript 技术栈
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
@@ -12,49 +12,51 @@
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 
-Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
+欢迎阅读我的 JavaScript 教程：**从零开始构建 JavaScript 技术栈**
 
-This is a minimalistic and straight to the point guide to assembling a JavaScript stack. It teaches you how to set up **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai, Sinon, and Flow**. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring all these tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
+这是一个简单直接的 JavaScript 技术栈构建指南。它教你如何设置和使用 **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai, Sinon 和 Flow**。在此之前，你需要掌握基本的编程知识和一些 JavaScript 基础。 **本教程旨在将所有这些工具结合起来使用**，并为每个工具提供**最简单的示例**。 通过阅读本教程，你将学到如何*从零开始编写属于你自己的代码样板*。
 
-Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in them.
+本教程的目的是让你学会将各种工具组合起来使用，所以不会涉及它们的具体细节。如果你想深入了解，可以查阅它们的文档，或者找其他的教程。
 
-A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to set up the foundations in the simplest possible way, for a thorough understanding.
+教程中提到的大部分技术栈都会用到 React。目前的很多 React 教程都跳过了如何搭建开发环境的部分，直接给一堆配置文件，往往会让人感到很困惑。我采取的方法是一步一步搭建环境，让你彻底理解这些配置都是做什么用的，而不是把这些配置当成一个“黑盒”。
 
-Code examples are available for each chapter, and you can run them all with `yarn && yarn start` or `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
+每个章节都有代码示例，可以使用命令 `yarn && yarn start` 或 `npm install && npm start` 来运行。建议按照每章的说明，**一步一步**从零开始写所有的代码。
 
-**Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, just clone the last chapter and you're good to go.
+**每一章都包含前一章的代码**，所以如果你只是想找一个代码样板或脚手架，直接看最后一章的示例代码即可。
 
-Note: The order of chapters is not necessarily the most educational. For instance, testing / type checking could have been done before introducing React. It is quite difficult to move chapters around or edit past ones, since I need to apply those changes to every following chapter. If things settle down, I might reorganize the whole thing in a better way.
+注意：章节的顺序不一定是最有利于学习的顺序。 例如，测试和类型检查可以在引入 React 之前完成。 移动章节或编辑过去的章节比较困难，因为我同时需要将这些更改应用到后续加入的章节。 如果所有的内容都定下来了，我相信可以有更好的方式重新组织他们。
 
-The code of this tutorial works on Linux, macOS, and Windows.
+本教程的代码可以运行在 Linux，macOS 和 Windows 下。
 
-## Table of contents
+## 目录
 
-[1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
+[1 - Node, NPM, Yarn 和 package.json](/tutorial/1-node-npm-yarn-package-json)
 
-[2 - Installing and using a package](/tutorial/2-packages)
+[2 - 包的安装与使用](/tutorial/2-packages)
 
-[3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
+[3 - 使用 Babel 和 Gulp 配置 ES6 开发环境](/tutorial/3-es6-babel-gulp)
 
-[4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
+[4 - 使用 ES6 中的 class](/tutorial/4-es6-syntax-class)
 
-[5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
+[5 - ES6 模块系统](/tutorial/5-es6-modules-syntax)
 
-[6 - ESLint](/tutorial/6-eslint)
+[6 - 代码检查工具 ESLint](/tutorial/6-eslint)
 
-[7 - Client app with Webpack](/tutorial/7-client-webpack)
+[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
 
 [8 - React](/tutorial/8-react)
 
 [9 - Redux](/tutorial/9-redux)
 
-[10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
+[10 - Immutable JS 和 Redux 的改进方法](/tutorial/10-immutable-redux-improvements)
 
-[11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
+[11 - 使用 Mocha, Chai 和 Sinon 进行测试](/tutorial/11-testing-mocha-chai-sinon)
 
-[12 - Type Checking with Flow](/tutorial/12-flow)
+[12 - 使用 Flow 进行类型检查](/tutorial/12-flow)
 
 Coming up: Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+
+即将加入以下内容：部署/开发环境，Express，React 路由管理，服务端渲染，样式，React 测试工具 Enzyme，Git Hooks。
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
