@@ -37,4 +37,4 @@ console.log(toby.bark());
 
 下一章：[5 - ES6 模块系统](/tutorial/5-es6-modules-syntax)
 
-回到[上一章](/tutorial/3-es6-babel-gulp)或[目录](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/3-es6-babel-gulp)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
