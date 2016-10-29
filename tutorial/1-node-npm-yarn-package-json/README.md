@@ -26,8 +26,6 @@ sudo apt-get install -y nodejs
 - 新建 `index.js` 文件，内容为 `console.log('Hello world')`。
 - 在当前文件夹下运行 `node .`（Node 默认会去找当前文件夹下的 `index.js`）。将打印 “Hello world”。
 
-Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
-
 运行 `node .` 可能有点太容易了。我们将使用 NPM / Yarn 脚本来触发代码的执行。这样做的好处是，即使我们的程序变得更复杂，也能使用简单的一个命令 `yarn start` 来运行整个程序。
 
 - 给 `package.json` 中的 `scripts` 对象增加 `"start": "node ."`
