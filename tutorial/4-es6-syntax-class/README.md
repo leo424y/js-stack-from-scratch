@@ -1,6 +1,6 @@
-# 4 - Using the ES6 syntax with a class
+# 4 - 使用 ES6 中的 class
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- 新建一个文件 `src/dog.js`，包含以下内容：
 
 ```javascript
 class Dog {
@@ -16,11 +16,11 @@ class Dog {
 module.exports = Dog;
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+如果你之前接触过面向对象编程，你应该不会感到陌生。对于 JavaScript 来说，这是最近才有的语法。这个类通过赋值给 `module.exports` 暴露出来。
 
-Typical ES6 code uses classes, `const` and `let`, "template strings" (with back ticks) like the one in `bark()`, and arrow functions (`(param) => { console.log('Hi'); }`), even though we're not using any in this example.
+ES6 代码中经常使用的有类，`const` 和 `let`，模板字符串和箭头函数（`(param) => { console.log('Hi'); }`），尽管我们在这个例子中没有使用到上面说的这些。
 
-In `src/index.js`, write the following:
+在 `src/index.js` 加入如下内容：
 
 ```javascript
 const Dog = require('./dog');
@@ -29,13 +29,12 @@ const toby = new Dog('Toby');
 
 console.log(toby.bark());
 ```
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+你可能注意到了，跟引用第三方包 `color ` 的方式有点不一样，当我们需要引用本地的文件时，在 `require()` 中使用了 `./`。
 
-- Run `yarn start` and it should print 'Wah wah, I am Toby'.
+- 运行 `yarn start` ，将打印  'Wah wah, I am Toby'。
+- 看一下 `lib` 中编译后的文件长什么样（`const` 都被 `var` 替换了）。
 
-- Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
 
+下一章：[5 - ES6 模块系统](/tutorial/5-es6-modules-syntax)
 
-Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
-
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/3-es6-babel-gulp)或[目录](https://github.com/verekia/js-stack-from-scratch).
