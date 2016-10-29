@@ -1,6 +1,6 @@
 # 从零开始构建 JavaScript 技术栈
 
-这是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本，欢迎提交 PR
+这是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本，**欢迎提交 PULL REQUEST**
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
@@ -32,19 +32,19 @@
 
 ## 目录
 
-[1 - Node, NPM, Yarn 和 package.json](/tutorial/1-node-npm-yarn-package-json)
+[1 - Node, NPM, Yarn 和 package.json（翻译完成）](/tutorial/1-node-npm-yarn-package-json)
 
-[2 - 包的安装与使用](/tutorial/2-packages)
+[2 - 包的安装与使用（翻译完成）](/tutorial/2-packages)
 
-[3 - 使用 Babel 和 Gulp 配置 ES6 开发环境](/tutorial/3-es6-babel-gulp)
+[3 - 使用 Babel 和 Gulp 配置 ES6 开发环境（翻译完成）](/tutorial/3-es6-babel-gulp)
 
-[4 - 使用 ES6 中的 class](/tutorial/4-es6-syntax-class)
+[4 - 使用 ES6 中的 class（翻译完成）](/tutorial/4-es6-syntax-class)
 
-[5 - ES6 模块系统](/tutorial/5-es6-modules-syntax)
+[5 - ES6 模块系统（翻译完成）](/tutorial/5-es6-modules-syntax)
 
-[6 - 代码检查工具 ESLint](/tutorial/6-eslint)
+[6 - 代码检查工具 ESLint（翻译完成）](/tutorial/6-eslint)
 
-[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
+[7 - 前端打包工具 Webpack（翻译完成）](/tutorial/7-client-webpack)
 
 [8 - React](/tutorial/8-react)
 
