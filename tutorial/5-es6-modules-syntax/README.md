@@ -35,6 +35,7 @@ const toby = new Cat('Toby');
 ```javascript
 import gulp from 'gulp';
 import babel from 'gulp-babel';
+import del from 'del';
 import { exec } from 'child_process';
 ```
 

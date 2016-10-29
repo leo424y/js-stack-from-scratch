@@ -1,5 +1,7 @@
 # 从零开始构建 JavaScript 技术栈
 
+这是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本，欢迎提交 PR
+
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
 [![Gulp](/img/gulp.png)](http://gulpjs.com/)
@@ -54,7 +56,15 @@
 
 [12 - 使用 Flow 进行类型检查](/tutorial/12-flow)
 
-即将加入以下内容：部署/开发环境，Express，React 路由管理，服务端渲染，样式，React 测试工具 Enzyme，Git Hooks。
+## 即将加入以下内容
+
+部署/开发环境，Express，React 路由管理，服务端渲染，样式，React 测试工具 Enzyme，Git Hooks。
+
+## Translations
+
+- [Chinese](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
+
+## Credits
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
