@@ -1,12 +1,12 @@
-# 6 - ESLint
+# 6 - 代码检查工具 ESLint
 
-We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
+我们需要检查代码来发现潜在的问题。ESLint 是 ES6 代码检查的首选。在这个例子中，我们不自己配置规则，而是使用 Airbnb 的规则。它依赖了一些插件，首先需要安装它们：
 
-- Run `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+- 运行 `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
 
-As you can see, you can install several packages in one command. It will add all of these to your `package.json`, as usual.
+一条命令里可以安装多个包。这些包都会自动添加到 `package.json` 中。
 
-In `package.json`, add an `eslintConfig` field like so:
+在 `package.json` 中添加 `eslintConfig` 字段：
 ```json
 "eslintConfig": {
   "extends": "airbnb",
@@ -15,15 +15,16 @@ In `package.json`, add an `eslintConfig` field like so:
   ]
 },
 ```
-The `plugins` part is to tell ESLint that we use the ES6 import syntax.
 
-**Note**: An `.eslintrc.js` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
+`plugin` 字段用于告诉 ESLint 我们使用了 ES6 中的模块语法。
 
-We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gulp plugin as well:
+**注意**：也可以使用根目录下的 `.eslintrc.js` 来代替 `package.json` 中的 `eslintConfig` 字段。跟 Babel 配置类似，我们不希望根目录下有太多文件，但如果你的 ESLint 配置比较复杂，那可以考虑把它单独放在一个文件里。
 
-- Run `yarn add --dev gulp-eslint`
+我们将创建一个 Gulp 任务，用于运行 ESLint。首先需要安装 ESLint 的 Gulp 插件：
 
-Add the following task to your `gulpfile.babel.js`:
+- 运行 `yarn add --dev gulp-eslint`
+
+将以下任务添加到 `gulpfile.babel.js` 中：
 
 ```javascript
 import eslint from 'gulp-eslint';
@@ -47,9 +48,9 @@ gulp.task('lint', () => {
 });
 ```
 
-Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
+在这个任务中，将 `gulpfile.babel.js` 通过 `src` 包括进来了。
 
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
+为 `build` 任务添加一个依赖 `lint`：
 
 ```javascript
 gulp.task('build', ['lint', 'clean'], () => {
@@ -57,17 +58,17 @@ gulp.task('build', ['lint', 'clean'], () => {
 });
 ```
 
-- Run `yarn start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
+- 运行 `yarn start`，此时会报一堆代码检查错误，以及一个关于 `console.log()` 的警告。
 
-One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
+其中一个错误是 `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`。这其实不是我们想要的，因为 ESLint 不知道哪些文件是构建过程的一部分，哪些不是，所以我们需要写一些注释来告诉他。在 `gulpfile.babel.js` 的顶部添加：
 
-```javascript```
+```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
-This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
+这样 ESLint 就不会对这个文件使用 `import/no-extraneous-dependencies` 规则了。
 
-Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
+还有一个错误：`Unexpected block statement surrounding arrow body (arrow-body-style)`。ESLint 告诉我们有更好的写法：
 
 ```javascript
 () => {
@@ -75,15 +76,15 @@ Now we are left with the issue `Unexpected block statement surrounding arrow bod
 }
 ```
 
-It should be rewritten into:
+应该写成：
 
 ```javascript
 () => 1
 ```
 
-Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
+在 ES6 中，如果函数体中只包含 return 语句时，可以去掉大括号，return 语句和分号。
 
-So let's update the Gulp file accordingly:
+相应的我们可以更新 Gulp 文件了：
 
 ```javascript
 gulp.task('lint', () =>
@@ -105,13 +106,13 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
-The last issue warning left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
+最后一个问题是关于 `console.log()` 的。 `console.log()` 是我们预期的结果，应该告诉 ESLint 不要检查这个规则。你可能已经猜到了，与之前类似，将 `/* eslint-disable no-console */` 添加到 `index.js` 即可。
 
-- Run `yarn start` and we are now all clear again.
+- 运行 `yarn start`，现在应该没有任何错误了。
 
-**Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
+**注意**：本章我们学习了如何在终端中配置 ESLint。在代码构建期间，提交之前就发现潜在的错误是一个很好的功能，你可能希望将这个功能集成到 IDE 里。**不要**使用 IDE 默认的 ESLint 配置，你需要额外配置一下让 IDE 使用 `node_modules` 下的 ESLint 命令（一般是 `node_modules/.bin/eslint`）。这样才会使用我们自己定义的配置。
 
 
-Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
+下一章：[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
 
-Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/5-es6-modules-syntax)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
