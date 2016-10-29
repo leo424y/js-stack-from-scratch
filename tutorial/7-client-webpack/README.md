@@ -1,8 +1,8 @@
-# 7 - Client App with Webpack
+# 7 - 前端打包工具 Webpack
 
-## Structure of our app
+## 应用程序结构
 
-- Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
+- 在根目录下新建 `dist` 目录，在其中新建一个 `index.html` 文件：
 
 ```html
 <!doctype html>
@@ -16,11 +16,11 @@
 </html>
 ```
 
-In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`.
+在 `src` 文件夹中，新建 `server`，`shared`，`client` 文件夹，将 `index.js` 移动到 `server` 文件夹中，将 `dog.js` 移动到 `shared` 文件夹中。在 `client` 文件夹中新建 `app.js`。
 
-We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+目前我们不会涉及 Node 后端相关的知识，但将这些文件分开到不同的文件夹，有助于理解这些文件的作用。由于目录结构变了，所以我们需要将 `server/index.js` 中的 `import Dog from './dog';` 修改成 `import Dog from '../shared/dog';`，不然 ESLint 会报一个模块无法解析的错误。
 
-Write this in `client/app.js`:
+在 `client/app.js` 中添加：
 
 ```javascript
 import Dog from '../shared/dog';
@@ -30,36 +30,35 @@ const browserToby = new Dog('Browser Toby');
 document.querySelector('.app').innerText = browserToby.bark();
 ```
 
-Add the following to your `package.json`, under `eslintConfig`:
+在 `package.json` 中的 `eslintConfig` 中添加：
 
 ```json
 "env": {
   "browser": true
 }
 ```
-This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
+这样可以让 ESLint 知道目前在浏览器环境中，所以 `window` 或 `document` 之类的变量一定是存在的，就不会报变量未声明的错误了。
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
+如果你希望在前端代码中使用一些最新的 ES 功能，比如 `Promise`，需要引入 [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/)。
 
-- Run `yarn add babel-polyfill`
+- 运行 `yarn add babel-polyfill`
 
-And before anything else in `app.js`, add this import:
+在 `app.js` 的最前面加入：
 
 ```javascript
 import 'babel-polyfill';
 ```
 
-Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
+这样最终打包生成的文件会多大约 300KB 的体积，所以如果你不需要这里面的任何功能，不要这么做。
 
 ## Webpack
 
-In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Webpack is a tool that does this.
+在 Node 环境中，你可以使用 `import` 导入任何的文件，Node 根据路径自动寻找这些文件。而在浏览器端，并没有一个文件系统，所以没有可以用 `import` 导入的东西。为了让入口文件 `app.js` 知道它需要导入什么，我们要将整个依赖树“打包”到一个文件中。Webpack 就是用来做这个的。
 
-Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is possible to use ES6 imports and exports in it, in the exact same way that we made Gulp rely on Babel to do so: by naming this file `webpack.config.babel.js`.
+和 Gulp 类似，Webpack 也需要一个配置文件，叫 `webpack.config.js`。为了使用 ES6 模块语法，跟之前的 Gulp 一样，需要将配置文件命名为 `webpack.config.babel.js` 即可。
 
-- Create an empty `webpack.config.babel.js` file
-
-- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task, and a few more `paths` constants:
+- 新建 `webpack.config.babel.js` 文件
+- 添加 `webpack.config.babel.js` 到 Gulp 的 `lint` 任务中，同时在 `paths` 中添加一些常量：
 
 ```javascript
 const paths = {
@@ -84,11 +83,10 @@ gulp.task('lint', () =>
 );
 ```
 
-We need to teach Webpack how to process ES6 files via Babel (just like we taught Gulp how to process ES6 files with `gulp-babel`). In Webpack, when you need to process files that are not plain old JavaScript, you use *loaders*. So let's install the Babel loader for Webpack:
+我们需要告诉 Webpack 如何处理 ES6 文件（就跟之前 Gulp 使用 `gulp-babel` 一样）。在 Webpack 中，如果需要处理除旧版本的 JavaScript 之外的文件，需要使用 *loaders*。所以我们要安装 Babel 的 loader：
 
-- Run `yarn add --dev babel-loader`
-
-- Write the following to your `webpack.config.babel.js` file:
+- 运行 `yarn add --dev babel-loader`
+- 在 `webpack.config.babel.js` 中添加以下内容：
 
 ```javascript
 export default {
@@ -111,38 +109,37 @@ export default {
 };
 ```
 
-Let's analyze this a bit:
+我们一起分析一下这个文件到底做了什么：
 
-We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. `devtool: 'source-map'` will enable source maps for a better debugging experience in your browser. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `node_modules` folder is excluded because there is no transpilation to do there. This way, when your code `import`s packages located in `node_modules`, Babel doesn't bother processing those files, which reduces build time. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less paths like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
+首先 `export` 了一个对象。`output.filename` 指定了打包后的文件名。`devtool: 'source-map'` 将开启 source map，让浏览器调试更方便。`module.loaders` 中的 `test` 字段是一个 JavaScript 的正则表达式，匹配的文件将会使用 `babel-loader` 处理。在下一章中我们需要匹配 `.js` 和 `.jsx`（React），所以使用了 `/\.jsx?$/` 这个正则。`node_modules` 中的文件不需要编译，所以包含在 `exclude` 字段中，这样 Babel 不会去尝试编译这些文件，能减少构建时间。`resolve` 字段告诉 Webpack 哪些文件在 `import` 的时候可以省略扩展名，这样 `import Foo from './foo'` 中的 `foo` 可以代表 `foo.js` 或 `foo.jsx`。
 
-Okay so now we have Webpack set up, but we still need a way to *run* it.
+配置完毕，现在我们需要运行 Webpack。
 
-## Integrating Webpack to Gulp
+## 将 Webpack 集成到 Gulp
 
-Webpack can do a lot of things. It can actually replace Gulp entirely if your project is mostly client-side. Gulp being a more general tool, it is better suited for things like linting, tests, and back-end tasks though. It is also simpler to understand for newcomers than a complex Webpack config. We have a pretty solid Gulp setup and workflow here, so integrating Webpack to our Gulp build is going to be easy peasy.
+Webpack 可以做很多事情。如果你的项目中主要是客户端的业务逻辑，它实际上可以完全替代 Gulp。Gulp 是一个更通用的工具，它更适合用于代码检查，测试和后端任务等，同时对于新手来说比复杂的 Webpack 更容易理解。我们已经有一个健壮的 Gulp 工作流了，所以将 Webpack 集成到 Gulp 中会比较容易。
 
-Let's create the Gulp task to run Webpack. Open your `gulpfile.babel.js`.
+接下来我们要创建一个 Gulp 任务用于执行 Webpack。打开 `gulpfile.babel.js`。
 
-We don't need the `main` task to execute `node lib/` anymore, since we will open `index.html` to run our app.
+现在不需要 `main` 任务执行 `node lib/` 命令了，取而代之的是打开 `index.html` 来运行 APP。
 
-- Remove `import { exec } from 'child_process'`.
+- 移除 `import { exec } from 'child_process'`
 
-Similarly to Gulp plugins, the `webpack-stream` package lets us integrate Webpack into Gulp very easily.
+与 Gulp 插件类似，`webpack-stream` 这个包使我们能够很容易将 Webpack 集成到 Gulp 中。
 
-- Install the package with: `yarn add --dev webpack-stream`
-
-- Add the following `import`s:
+- 安装包：`yarn add --dev webpack-stream`
+- 加入以下内容：
 
 ```javascript
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 ```
 
-The second line just grabs our config file.
+第二行代码导入了我们的配置文件。
 
-Like I said earlier, in the next chapter we are going to use `.jsx` files (on the client, and even on the server later on), so let's set that up right now to have a bit of a head start.
+如我之前所说，在下一章中我们将使用 `.jsx` 文件（在客户端，甚至是服务端），所以让我们现在先设置它。
 
-- Change the constants to the following:
+- 将常量改成以下内容：
 
 ```javascript
 const paths = {
@@ -157,11 +154,11 @@ const paths = {
 };
 ```
 
-The `.js?(x)` is just a pattern to match `.js` or `.jsx` files.
+`.js?(x)` 只是一个匹配 `.js` 或 `.jsx` 文件的模式。 
 
-We now have constants for the different parts of our application, and an entry point file.
+我们现在有了我们应用程序的不同部分的常量，以及一个入口文件。
 
-- Modify the `main` task like so:
+- 修改 `main` 任务如下：
 
 ```javascript
 gulp.task('main', ['lint', 'clean'], () =>
@@ -171,13 +168,13 @@ gulp.task('main', ['lint', 'clean'], () =>
 );
 ```
 
-**Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now. We actually aren't even going to be using the `build` task and `lib` folder anymore until that chapter, since all we care about right now is the client bundle.
+**注意**：`build` 任务目前会将 `src` 下的所有 `.js` 文件的 ES6 语法转换成 ES5。现在我们已经将代码分成了服务端，共享的和客户端三部分，分别位于 `server`， `shared` 和 `client` 目录下，我们可以让这个任务只编译服务端和共享的（因为客户端代码由 Webpack 负责）。但是，在测试那一章中，我们需要用 Gulp 编译客户端的代码以便在 Webpack 外部进行测试。所以，在那一章之前，这部分的构建过程并没有意义。实际上，在那之前，甚至可以不再使用 `build` 任务和 `lib` 文件夹，因为我们现在关心的是客户端打包。
 
-- Run `yarn start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
+- 运行 `yarn start`，文件夹下多出了一个 `client-bundle.js` 文件，在浏览器中打开 `index.html` ，将展示 "Wah wah, I am Browser Toby"。
 
-One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/client-bundle.js.map` files are not being cleaned up by our `clean` task before each build.
+最后一点：与 `lib` 文件夹不同， `dist/client-bundle.js` 和 `dist/client-bundle.js.map` 文件在每次构建之前都不会被 `clean` 任务清理。
 
-- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
+- 添加 `clientBundle: 'dist/client-bundle.js?(.map)'` 到 `paths`，同时调整 `clean` 任务：
 
 ```javascript
 gulp.task('clean', () => del([
@@ -186,8 +183,8 @@ gulp.task('clean', () => del([
 ]));
 ```
 
-- Add `/dist/client-bundle.js*` to your `.gitignore` file:
+- 将 `/dist/client-bundle.js*` 添加到 `.gitignore` 文件。
 
-Next section: [8 - React](/tutorial/8-react)
+下一章：[8 - React](/tutorial/8-react)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+返回[上一节](/tutorial/6-eslint)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
