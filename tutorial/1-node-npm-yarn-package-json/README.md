@@ -42,8 +42,6 @@ npm-debug.log
 yarn-error.log
 ```
 
-**Note**: If you take a look at the `package.json` files I provide, you will see a `tutorial-test` script in every chapter. Those scripts let me test that the chapter works fine when running `yarn && yarn start`. You can delete them in your own projects.
-
 **注意**：你可能注意到每章的 `package.json` 文件都有一个 `tutorial-test` 脚本。这些脚本是用于测试的，确保 `yarn && yarn start` 运行正确。你可以在自己的项目中删除它们。
 
 下一章：[2 - 包的安装与使用](/tutorial/2-packages)
