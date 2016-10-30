@@ -98,6 +98,6 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 - 不要忘记运行 `yarn add redux-actions`
 
-下一章：[11 - 使用 Mocha, Chai, and Sinon 进行测试](/tutorial/11-testing-mocha-chai-sinon)
+下一章：[11 - 使用 Mocha, Chai 和 Sinon 进行测试](/tutorial/11-testing-mocha-chai-sinon)
 
 回到[上一章](/tutorial/9-redux)或[目录](https://github.com/pd4d10/js-stack-from-scratch)

@@ -1,16 +1,15 @@
-# 11 - Testing with Mocha, Chai, and Sinon
+# 11 - 使用 Mocha, Chai 和 Sinon 进行测试
 
-## Mocha and Chai
+## Mocha 和 Chai
 
-- Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
+- 新建 `src/test` 文件夹。这个文件夹的目录结构应该与 app 的目录结构一致，所以也应该新建 `src/test/client` 文件夹（可以不添加 `server` and `shared`，目前我们只写这两个文件夹下的测试）
+- 在 `src/test/client` 中新建 `state-test.js`，我们将在这里编写 Redux 生命周期的测试用例。
 
-- In `src/test/client`, create a `state-test.js` file, which we are going to use to test our Redux application life cycle.
+我们选择 [Mocha](http://mochajs.org/) 作为主要的测试框架。Mocha 易于使用，功能强大，是目前[最流行的 JavaScript 测试框架](http://stateofjs.com/2016/testing/)，灵活并且模块化。另外，它允许你使用任何的断言库。 Chai 是一个非常棒的断言库，有很多[插件](http://chaijs.com/plugins/)可用，并允许你选择不同的断言样式。`
 
-We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
+- 安装 Mocha 和 Chai：运行 `yarn add --dev mocha chai`
 
-- Let's install Mocha and Chai by running `yarn add --dev mocha chai`
-
-In `state-test.js`, write the following:
+在 `state-test.js` 中添加：
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
@@ -42,17 +41,17 @@ describe('App State', () => {
   });
 });
 ```
-Alright, let's analyze this whole thing.
+好，现在我们一起分析一下都发生了什么。
 
-First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
+首先，注意我们是如何从 `chai` 中导入 `should` 断言样式的。这让我们使用 `mynumber.should.equal(3)` 这样的语法去做断言，很酷。为了能够让 `should` 让任何对象调用，需要所有测试之前运行 `should()`。这些断言中，有些是表达式，如 `mybook.should.be.true`，这会让 ESLint 报错，因此我们在顶部添加了一个 ESLint 注释，用于禁用 `no-unused-expressions` 这个规则。
 
-Mocha tests work like a tree. In our case, we want to test the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+Mocha 测试的工作就像一棵树。在这个例子中，`makeBark` 方法会修改 state 中的 `dog` 属性，我们想测试这个方法，所以应该使用这种层次结构：`App State > Dog > makeBark`，正如上面代码里 `describe()` 声明的一样。`it()` 是实际的测试函数， `beforeEach()` 是在每个 `it()` 测试之前执行的函数。在这个例子中，在测试之前我们需要新建一个 store。在文件的顶部声明一个 `store` 变量，这样在每个测试用例中都能用了。
 
-Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
+`makeBark` 这个测试的意义非常明确， `it()` 中提供的字符串描述使它更加明确了：这个测试用例是在测试调用了 `hasBarked` 方法后 `hasBarked` 将从 `false` 变为 `true`。
 
-Alright, let's run this test!
+好，该运行测试了！
 
-- Create the following `test` task, which relies on the `gulp-mocha` plugin:
+- 新建 `test` 任务，它依赖 `gulp-mocha` 插件：
 
 ```javascript
 import mocha from 'gulp-mocha';
@@ -70,27 +69,28 @@ gulp.task('test', ['build'], () =>
 );
 ```
 
-- Run `yarn add --dev gulp-mocha` of course.
+- 当然在此之前需要运行 `yarn add --dev gulp-mocha` 安装它
 
-As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
+如你所见，测试需要依赖 `lib` 中的代码，所以 `build` 任务是 `test` 任务的依赖。`build` 也有一个依赖，`lint`，最后我们为 `main` 添加依赖 `test`，所以 `default` 任务的依赖顺序是这样的：`lint` > `build` > `test` > `main`。
 
-- Change the prerequisite of `main` to `test`:
+- 为 `main` 添加依赖 `test`：
 
 ```javascript
 gulp.task('main', ['test'], () => /* ... */ );
 ```
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `yarn test` to just run your tests. `test` is also the standard script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
-
-- Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
+- 在 `package.json` 中将 `"test"` 字段替换为 `"test": "gulp test"`。 这样就能使用 `yarn test` 命令运行测试了。像持续集成服务等都将默认读取 `test` 中的内容，这是一种标准的做法，因此我们应该始终在 `test` 中填写测试命令。`yarn start` 命令将在 Webpack 进行客户端打包之前运行所有测试，确保了只有所有测试通过才进行打包。
+- 运行 `yarn test` 或 `yarn start`，将会展现测试的结果，希望全是绿色（代表测试通过了）。
 
 ## Sinon
 
-In some cases, we want to be able to *fake* things in a unit test. For instance, let's say we have a function, `deleteEverything`, which contains a call to `deleteDatabases()`. Running `deleteDatabases()` causes a lot of side-effects, which we absolutely don't want to happen when running our test suite.
+在某些情况下，我们希望在单元测试中伪造一些东西。假设我们有一个函数 `deleteEverything`，它包含对 `deleteDatabases()` 的调用。如果真的运行了 `deleteDatabases()`（删除数据库），将会有很多副作用，我们绝不希望在运行测试时发生这种情况。
 
-[Sinon](http://sinonjs.org/) is a testing library that offers **Stubs** (and a lot of other things), which allow us to neutralize `deleteDatabases` and simply monitor it without actually calling it. This way we can test if it got called, or which parameters it got called with for instance. This is typically very useful to fake or avoid AJAX calls - which can cause side-effects on the back-end.
+[Sinon](http://sinonjs.org/) 是一个提供 **Stubs**（还有许多其他功能）的测试库，它允许我们不实际调用 `deleteDatabases` 而是监听它。这样我们可以测试它是否被调用，或者它调用了哪些参数。它可以伪造或避免 AJAX 请求，从而避免了真实 AJAX 请求对后端的副作用。
 
-In the context of our app, we are going to add a `barkInConsole` method to our `Dog` class in `src/shared/dog.js`:
+译者注：stub 通常翻译为测试桩。拿 `deleteDatabases` 举例，我们肯定不希望运行测试把数据库都干掉，打了测试桩之后，跑测试用例不会真的删数据库，但我们就能知道这个方法是否执行，执行过几次，执行时传入的参数是什么等等。
+
+我们将  `src/shared/dog.js` 的`Dog` 类中增加一个 `barkInConsole` 方法：
 
 ```javascript
 class Dog {
@@ -112,9 +112,9 @@ class Dog {
 export default Dog;
 ```
 
-If we run `barkInConsole` in a unit test, `console.log()` will print things in the terminal. We are going to consider this to be an undesired side-effect in the context of our unit tests. We are interested in knowing if `console.log()` *would have normally been called* though, and we want to test what parameters it *would have been called with*.
+如果在单元测试中运行 `barkInConsole`，`console.log()` 会把信息打印到终端。我们把它作为一种副作用来看待（就像 AJAX 一样），不希望它真的把东西打印出来，而是想知道 `console.log()` *是否正常被调用*，以及*调用的参数是什么*。
 
-- Create a new `src/test/shared/dog-test.js` file, and add write the following:
+- 新建 `src/test/shared/dog-test.js` 文件，加入以下内容：
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-console */
@@ -142,16 +142,16 @@ describe('Shared', () => {
 });
 ```
 
-Here, we are using *stubs* from Sinon, and a Chai plugin to be able to use Chai assertions on Sinon stubs and such.
+这里我们使用了 Sinon 的 *stubs* 功能和一个 Chai 的插件。
 
-- Run `yarn add --dev sinon sinon-chai` to install these libraries.
+- 运行 `yarn add --dev sinon sinon-chai` 安装需要的库文件
 
-So what is new here? Well first of all, we call `chai.use(sinonChai)` to activate the Chai plugin. Then, all the magic happens in the `it()` statement: `stub(console, 'log')` is going to neutralize `console.log` and monitor it. When `new Dog('Test Toby').barkInConsole()` is executed, a `console.log` is normally supposed to happen. We test this call to `console.log` with `console.log.should.have.been.calledWith()`, and finally, we `restore` the neutralized `console.log` to make it work normally again.
+那么这里到底做了什么呢？首先，我们调用 `chai.use(sinonChai)` 来激活 Chai 插件。所有的奥秘都在发生在 `it()` 语句：`stub(console, 'log')`  将会为 `console.log` 打一个 stab 并监听它。当 `new Dog('Test Toby').barkInConsole()` 执行的时候，不出意外 `console.log` 应当会被调用。我们使用 `console.log.should.have.been.calledWith()` 来测试是否调用了 `console.log`。测试结束后恢复 `console.log`，使它再次正常工作。
 
-**Important note**: Stubbing `console.log` is not recommended, because if the test fails, `console.log.restore()` is never called, and therefore `console.log` will remain broken for the rest of the command you executed in your terminal! It won't even print the error message that caused the test to fail, so it leaves you with very little information about what happened. That can be quite confusing. It is a good example to illustrate stubs in this simple app though.
+**重要说明**：不推荐对 `console.log` 使用 stab，因为一旦测试失败，`console.log.restore()` 就不会被调用了，所以在其他测试代码执行的时候 `console.log` 一直是坏的！甚至不会打印导致测试失败的错误消息，这会很麻烦，一旦出了问题我们也不知道是什么问题。这个例子只用于说明 stub 功能。
 
-If everything went well in this chapter, you should have 2 passing tests.
+如果一切顺利，目前应该有两个 “pass” 的测试用例了。
 
-Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
+下一章：[12 - 使用 Flow 进行类型检查](/tutorial/12-flow)
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/10-immutable-redux-improvements)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
