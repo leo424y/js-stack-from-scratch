@@ -8,7 +8,7 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 关于中文翻译的问题可以在[这里](https://github.com/pd4d10/js-stack-from-scratch/pull/1)提问，**欢迎提交 PULL REQUEST**
 
-
+<br/>
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
