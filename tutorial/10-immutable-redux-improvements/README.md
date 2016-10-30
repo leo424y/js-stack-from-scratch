@@ -1,26 +1,26 @@
-# 10 - Immutable JS and Redux Improvements
+# 10 - Immutable JS 和 Redux 的改进方法
 
 ## Immutable JS
 
-Unlike the previous chapter, this one is rather easy, and consists in minor improvements.
+与前一章不同，这一章相当容易，只是对之前的代码稍作改进。
 
-First, we are going to add **Immutable JS** to our codebase. Immutable is a library to manipulate objects without mutating them. Instead of doing:
+首先向代码库添加 Immutable JS。Immutable 的中文意思是不可变，Immutable 是一个操作 JS 对象而不改变它们的库，不是这样做：
 
 ```javascript
 const obj = { a: 1 };
 obj.a = 2; // Mutates `obj`
 ```
-You would do:
+而是这样做：
 ```javascript
 const obj = Immutable.Map({ a: 1 });
 obj.set('a', 2); // Returns a new object without mutating `obj`
 ```
 
-This approach follows the **functional programming** paradigm, which works really well with Redux. Your reducer functions actually *have* to be pure functions that don't alter the state passed as parameter, but return a brand new state object instead. Let's use Immutable to enforce this.
+这是一种**函数式编程**的范例，它能很好地与 Redux 一起使用。reducer 函数*必须*是纯函数，不能改变作为参数传递的 state，而是返回一个全新的 state 对象。让我们使用 Immutable 来强制做到这一点。
 
-- Run `yarn add immutable`
+- 运行 `yarn add immutable`
 
-We are going to use `Map` in our codebase, but ESLint and the Airbnb config will complain about using a capitalized name without it being a class. Add the following to your `package.json` under `eslintConfig`:
+我们将使用 `Map`，但 Airbnb 配置的 ESLint 会将其视为一个错误（大写开头的变量必须是一个类）。添加以下代码到 `package.json` 的 `eslintConfig`：
 
 ```json
 "rules": {
@@ -35,11 +35,11 @@ We are going to use `Map` in our codebase, but ESLint and the Airbnb config will
   ]
 }
 ```
-This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by Yarn/NPM, so we cannot make it more compact unfortunately.
+这样 `Map` 和 `List`（我们使用到的两个 Immutable 对象）就不会被 ESLint 视为错误了。这个 JSON 的实际上是被 Yarn/NPM 自动格式化了，所以我们没办法让它更紧凑。
 
-Anyway, back to Immutable:
+回到 Immutable 的部分：
 
-In `dog-reducer.js` tweak your file so it looks like this:
+修改 `dog-reducer.js` 文件如下：
 
 ```javascript
 import Immutable from 'immutable';
@@ -61,9 +61,9 @@ const dogReducer = (state = initialState, action) => {
 export default dogReducer;
 ```
 
-The initial state is now built using an Immutable Map, and the new state is generated using `set()`, preventing any mutation of the previous state.
+初始 state 现在是一个 Immutable Map 了，使用 `set()` 方法生成一个新的 state，这就避免了改变原来的 state 对象。
 
-In `containers/bark-message.js`, update the `mapStateToProps` function to use `.get('hasBarked')` instead of `.hasBarked`:
+在 `containers/bark-message.js` 中的 `mapStateToProps` 函数将 `.hasBarked` 替换为 `.get('hasBarked')`：
 
 ```javascript
 const mapStateToProps = state => ({
@@ -71,20 +71,21 @@ const mapStateToProps = state => ({
 });
 ```
 
-The app should still behave exactly the way it did before.
+修改后 app 的行为与之前是一样的。
 
-**Note**: If Babel complains about Immutable exceeding 100KB, add `"compact": false` to your `package.json` under `babel`.
+**注意**：如果 Babel 提示 Immutable 超过了 100KB，在 `package.json` 中的 `babel` 字段添加 `"compact": false`。
 
-As you can see from the code snippet above, our state object still contains a plain old `dog` object attribute, which isn't immutable. It is fine this way, but if you want to only manipulate immutable objects, you could install the `redux-immutable` package to replace Redux's `combineReducers` function.
+从上面的代码片段中可以看出，我们的 state 对象 `dog` 属性仍然不是不可变的。这没问题，但如果你只想操作不可变对象，可以安装 `redux-immutable` 包来替换 Redux 的 `combineReducers` 函数。
 
-**Optional**:
-- Run `yarn add redux-immutable`
-- Replace your `combineReducers` function in `app.jsx` to use the one imported from `redux-immutable` instead.
-- In `bark-message.js` replace `state.dog.get('hasBarked')` by `state.getIn(['dog', 'hasBarked'])`.
+**可选步骤**：
+
+- 运行 `yarn add redux-immutable`
+- 把 `app.jsx` 中的 `combineReducers` 函数替换为从 `redux-immutable` 中导出的。
+- 将 `bark-message.js` 中的 `state.dog.get('hasBarked')` 替换为 `state.getIn(['dog', 'hasBarked'])`。
 
 ## Redux Actions
 
-As you add more and more actions to your app, you will find yourself writing quite a lot of the same boilerplate. The `redux-actions` package helps reducing that boilerplate code. With `redux-actions` you can rewrite your `dog-actions.js` file in a more compact way:
+当你添加越来越多的 action 后，你会发现自己写了很多重复代码。 `redux-actions` 这个包有助于减少重复的样板代码，你可以以更紧凑的方式重写 `dog-actions.js` 文件：
 
 ```javascript
 import { createAction } from 'redux-actions';
@@ -93,10 +94,10 @@ export const MAKE_BARK = 'MAKE_BARK';
 export const makeBark = createAction(MAKE_BARK, () => true);
 ```
 
-`redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, just like the action we previously wrote, so integrating `redux-actions` is seamless if you follow this model.
+`redux-actions` 实现了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 这个模型，就跟我们之前的代码一样，所以它能够无缝地集成在我们的 app 中。
 
-- Don't forget to run `yarn add redux-actions`.
+- 不要忘记运行 `yarn add redux-actions`
 
-Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
+下一章：[11 - 使用 Mocha, Chai, and Sinon 进行测试](/tutorial/11-testing-mocha-chai-sinon)
 
-Back to the [previous section](/tutorial/9-redux) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/9-redux)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
