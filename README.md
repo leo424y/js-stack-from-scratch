@@ -68,9 +68,10 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 部署/开发环境，Express，React 路由管理，服务端渲染，样式，React 测试工具 Enzyme，Git Hooks。
 
-## Translations
+## 翻译
 
 - [Chinese](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
+- [Italian](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
 
 ## Credits
 

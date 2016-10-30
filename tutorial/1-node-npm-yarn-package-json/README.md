@@ -28,7 +28,13 @@ sudo apt-get install -y nodejs
 
 运行 `node .` 可能有点太容易了。我们将使用 NPM / Yarn 脚本来触发代码的执行。这样做的好处是，即使我们的程序变得更复杂，也能使用简单的一个命令 `yarn start` 来运行整个程序。
 
-- 给 `package.json` 中的 `scripts` 对象增加 `"start": "node ."`
+- 在 `package.json` 中增加 `scripts` 字段如下：
+
+```
+"scripts": {
+  "start": "node ."
+}
+```
 
 `package.json` 必须是有效的 JSON 文件，这意味着不能使用尾逗号。手动编辑 `package.json` 文件时要注意这一点。
 
