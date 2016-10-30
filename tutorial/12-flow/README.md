@@ -1,12 +1,10 @@
 # 12 - Flow
 
-[Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
+[Flow](https://flowtype.org/) 是一个静态类型检查器。它检查代码中的类型问题，可以通过注解（annotation）添加显式类型声明。
 
-- In order for Babel to understand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `yarn add --dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
-
-- Create an empty `.flowconfig` file at the root of your project
-
-- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
+- 为了让 Babel 转换的时候移除 Flow 的注解，请运行 `yarn add --dev babel-preset-flow` 安装 Babel 的 Flow preset。然后在 `package.json` 中的 `babel.presets` 下添加 `"flow"`。
+- 在根目录新建 `.flowconfig` 文件
+- 运行 `yarn add --dev gulp-flowtype` 安装 Flow 的 Gulp 插件，在 `lint` 任务中添加 `flow()`，如下：
 
 ```javascript
 import flow from 'gulp-flowtype';
@@ -26,11 +24,11 @@ gulp.task('lint', () =>
 );
 ```
 
-The `abort` option is to interrupt the Gulp task if Flow detects an issue.
+`abort` 选项用于在检查到错误时中断 Gulp 任务。
 
-Alright, we should be able to run Flow now.
+现在应该可以运行 Flow 了。
 
-- Add Flow annotations to `src/shared/dog.js` like so:
+- 在 `src/shared/dog.js` 中添加 Flow 注解如下：
 
 ```javascript
 // @flow
@@ -57,35 +55,35 @@ class Dog {
 export default Dog;
 ```
 
-The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
+`// @flow` 注释告诉 Flow 这个文件需要进行类型检查。Flow 注解通常是在函数参数或函数名后加一个冒号。如果需要进一步了解，可以查看文档。
 
-Now if you run `yarn start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
+现在运行 `yarn start`，Flow 是正常的，但 ESLint 将会提示代码的语法有错。因为我们装了 `babel-preset-flow`，所以 Babel 能正常地解析 Flow 语法，而 ESLint 不能，如果 ESLint 能通过 Babel 的解析器来工作就好了。没问题，只要安装 `babel-eslint` 这个包就好了：
 
-- Run `yarn add --dev babel-eslint`
+- 运行 `yarn add --dev babel-eslint`
 
-- In `package.json`, under `eslintConfig`, add the following property: `"parser": "babel-eslint"`
+- 在 `package.json` 的 `eslintConfig` 字段添加 `"parser": "babel-eslint"`
 
-`yarn start` should now both lint and typecheck your code fine.
+`yarn start`，现在代码检查和类型检查应该都正常了。
 
-Now that ESLint and Babel are able to share a common parser, we can actually get ESLint to lint our Flow annotations via the `eslint-plugin-flowtype` plugin.
+现在 ESLint 和 Babel 共享同一个代码解析器，可以通过 `eslint-plugin-flowtype` 插件来检查 Flow 注解了。
 
-- Run `yarn add --dev eslint-plugin-flowtype` and add `"flowtype"` under `eslintConfig.plugins` in `package.json`, and add `"plugin:flowtype/recommended"` under `eslintConfig.extends` in an array next to `"airbnb"`.
+- 运行 `yarn add --dev eslint-plugin-flowtype`，并在 `package.json` 中的 `eslintConfig.plugins` 添加 `"flowtype"`，向 `eslintConfig.extends` 数组添加 `"plugin:flowtype/recommended"`
 
-Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
+现在，如果你使用 `name:string` 作为注释，ESLint 会提示冒号后少了一个空格。
 
-**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference. Since this tutorial is about the most minimal setup, I removed it.
+**注意**：在 `package.json` 中我们添加的 `"parser": "babel-eslint"` 属性包含了 `"plugin:flowtype/recommended"` 配置，所以实际上你可以移除它，让 `package.json` 更简洁。保留它则让语义显得更明确，这取决于你的个人喜好。本教程旨在最简洁的配置文件，所以我将它删除了。
 
-- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `yarn test` or `yarn start`, and add type annotations everywhere Flow asks you to do so.
+- 现在可以在 `src` 目录下的每个 `.js` 和 `.jsx` 文件中添加 `// @flow` 注释了，运行 `yarn test` 或 `yarn start`， 在每个 Flow 提示你的地方添加注解。
 
-One counterintuitive case is the following, for `src/client/component/message.jsx`:
+在 `src/client/component/message.jsx` 文件中，有一种比较违反直觉的情况如下：
 
 ```javascript
 const Message = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
-As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+在解构函数参数时，必须使用对象字面量来添加注解。
 
-Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
+另一个可能会遇到的情况是，在 `src/client/reducers/dog-reducer.js` 中，Flow 会提示 Immutable 没有 export default。这个问题在 [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863) 中提出了两个解决方法：
 
 ```javascript
 import { Map as ImmutableMap } from 'immutable';
@@ -93,16 +91,17 @@ import { Map as ImmutableMap } from 'immutable';
 import * as Immutable from 'immutable';
 ```
 
-Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
+在 Immutable 正式解决这个问题之前，选择你喜欢的方式吧。我个人倾向于使用 `import * as Immutable from 'immutable'`，因为它更短，而且这个问题修复以后不需要更改也能正常运行。
 
-**Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
+**注意**：如果 Flow 在 `node_modules` 文件夹中检测到类型错误，请在 `.flowconfig` 中添加一个`[ignore]` 来忽略特定的包（不要忽略整个 `node_modules` 目录）。看起来像这样
+
 ```
 [ignore]
 
 .*/node_modules/gulp-flowtype/.*
 ```
-In my case, the `linter-flow` plugin for Atom was detecting type errors in the `node_modules/gulp-flowtype` directory, which contains files annotated with `// @flow`.
+在我这的情况是，Atom 编辑器的 `linter-flow` 插件会检测 `node_modules/gulp-flowtype` 目录中的类型错误，针对那些用 `// @flow` 注释过的文件。
 
-You now have bullet-proof code that is linted, typechecked, and tested, good job!
+现在，你的代码已经通过了代码检查，类型检查和测试的考验了，好样的！
 
-Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+回到[上一章](/tutorial/11-testing-mocha-chai-sinon)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
