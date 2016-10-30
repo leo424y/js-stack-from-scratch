@@ -1,6 +1,14 @@
 # 从零开始构建 JavaScript 技术栈
 
-这是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本，**欢迎提交 PULL REQUEST**
+## 关于
+
+这里是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本。本教程**适合刚入门的新人**阅读。
+
+fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://github.com/verekia/js-stack-from-scratch/issues)提问。
+
+关于中文翻译的问题可以在[这里](https://github.com/pd4d10/js-stack-from-scratch/pull/1)提问，**欢迎提交 PULL REQUEST**
+
+
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
@@ -46,9 +54,9 @@
 
 [7 - 前端打包工具 Webpack（翻译完成）](/tutorial/7-client-webpack)
 
-[8 - React](/tutorial/8-react)
+[8 - React（翻译完成）](/tutorial/8-react)
 
-[9 - Redux](/tutorial/9-redux)
+[9 - Redux（翻译完成）](/tutorial/9-redux)
 
 [10 - Immutable JS 和 Redux 的改进方法](/tutorial/10-immutable-redux-improvements)
 
