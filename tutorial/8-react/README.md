@@ -1,14 +1,14 @@
 # 8 - React
 
-We're now going to render our app using React.
+我们现在要使用 React 来渲染我们的应用程序。
 
-First, let's install React and ReactDOM:
+首先安装 React 和 ReactDOM：
 
-- Run `yarn add react react-dom`
+- 运行 `yarn add react react-dom`
 
-These 2 packages go to our `"dependencies"` and not `"devDependencies"` because unlike build tools, the client bundle needs them in production.
+这两个包将添加到 `"dependencies"` 而不是 `"devDependencies"` ，因为生产环境的客户端打包需要它们，这跟构建过程需要的包不一样。
 
-Let's rename our `src/client/app.js` file into `src/client/app.jsx` and write some React and JSX code in it:
+将 `src/client/app.js` 重命名为 `src/client/app.jsx`，然后加入如下代码：
 
 ```javascript
 import 'babel-polyfill';
@@ -32,17 +32,15 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
+**注意**：如果您不熟悉 React 或 PropTypes 相关的知识，请先学习 React 的基本知识后再回到本教程。在接下来的章节里会有很多关于 React 的内容，所以你需要先理解它。
 
-In your Gulpfile, change the value of `clientEntryPoint` to give it a `.jsx` extension:
+在你的 Gulpfile 中修改 `clientEntryPoint` 的值，改成 `.jsx` 扩展名：
 
 ```javascript
 clientEntryPoint: 'src/client/app.jsx',
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
-Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`yarn add --dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
+我们使用了 JSX 语法，必须告诉 Babel 需要转换它。首先安装 React Babel preset，这个包告诉 Babel 如何转换 JSX 语法：`yarn add --dev babel-preset-react`。然后修改 `package.json` 中的 `babel` 字段：
 
 ```json
 "babel": {
@@ -53,9 +51,9 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 },
 ```
 
-Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
+现在运行 `yarn start`，打开 `index.html`，可以看见 React 渲染出了 "The dog says: Wah wah, I am Browser Toby"。
 
 
-Next section: [9 - Redux](/tutorial/9-redux)
+下一章：[9 - Redux](/tutorial/9-redux)
 
-Back to the [previous section](/tutorial/7-client-webpack) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+返回[上一章](/tutorial/7-client-webpack)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
