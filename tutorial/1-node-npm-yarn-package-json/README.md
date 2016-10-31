@@ -18,7 +18,7 @@ sudo apt-get install -y nodejs
 
 **注意**：如果你之前已经安装过 Node，可以使用 `nvm` ([Node Version Manager](https://github.com/creationix/nvm)) 安装最新版本的 Node。
 
-[Yarn](https://yarnpkg.com/) 是另一个包管理器，它比 NPM 快许多，而且能离线缓存，在包的依赖管理上更可靠。Yarn 于 2016 年 10 月 [发布](https://code.facebook.com/posts/1840075619545360) 以来就获得了广泛的使用，正在成为 JavaScript 社区选择的新的包管理器。我们将在本教程中使用 Yarn。如果你想使用 NPM，用 `npm install --save` 和 `npm install --dev` 分别替换 `yarn add` 和 `yarn add —dev` 命令即可。
+[Yarn](https://yarnpkg.com/) 是另一个包管理器，它比 NPM 快许多，而且能离线缓存，在包的依赖管理上[更可靠](https://yarnpkg.com/en/docs/yarn-lock)。Yarn 于 2016 年 10 月 [发布](https://code.facebook.com/posts/1840075619545360) 以来就获得了广泛的使用，正在成为 JavaScript 社区选择的新的包管理器。我们将在本教程中使用 Yarn。如果你想使用 NPM，用 `npm install --save` 和 `npm install --dev` 分别替换 `yarn add` 和 `yarn add —dev` 命令即可。
 
 - 按照[这个说明](https://yarnpkg.com/en/docs/install)安装 Yarn。你可以使用 `npm install -g yarn` 或 `sudo npm install -g yarn` 安装它（是的，我们可以使用NPM来安装Yarn，就像使用 Internet Explorer 或 Safari 安装Chrome 一样！）。
 - 创建一个新文件夹，并 `cd` 到文件夹中。

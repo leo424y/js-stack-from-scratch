@@ -49,7 +49,7 @@ document.querySelector('.app').innerText = browserToby.bark();
 import 'babel-polyfill';
 ```
 
-这样最终打包生成的文件会多大约 300KB 的体积，所以如果你不需要这里面的任何功能，不要这么做。
+这样最终打包生成的文件体积会更大，所以如果你不需要这里面的任何功能，不要这么做。为了提供固定的样板，我将把它一起打包进去，下一章的代码示例里会包括它。
 
 ## Webpack
 
