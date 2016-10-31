@@ -2,7 +2,7 @@
 
 ## 关于
 
-这里是 https://github.com/verekia/js-stack-from-scratch 的中文翻译版本。本教程**适合刚入门的新人**阅读。
+这里是[从零开始构建 JavaScript 技术栈](https://github.com/verekia/js-stack-from-scratch)的中文翻译版本。本教程**适合刚入门的新人**阅读。
 
 fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://github.com/verekia/js-stack-from-scratch/issues)提问。关于中文翻译的问题可以在[这里](https://github.com/pd4d10/js-stack-from-scratch/pull/1)提问。
 
@@ -24,11 +24,13 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 欢迎阅读我的 JavaScript 教程：**从零开始构建 JavaScript 技术栈**
 
-这是一个简单直接的 JavaScript 技术栈构建指南。它教你如何设置和使用 **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai, Sinon 和 Flow**。在此之前，你需要掌握基本的编程知识和一些 JavaScript 基础。 **本教程旨在将所有这些工具结合起来使用**，并为每个工具提供**最简单的示例**。 通过阅读本教程，你将学到如何*从零开始编写属于你自己的代码样板*。
+这是一个简单直接的 JavaScript 技术栈构建指南。在此之前，你需要掌握基本的编程知识和一些 JavaScript 基础。**本教程旨在将所有这些工具结合起来使用**，并为每个工具提供**最简单的示例**。 你可以把它当作*从零开始编写代码样板*的示范。
 
-本教程的目的是让你学会将各种工具组合起来使用，所以不会涉及它们的具体细节。如果你想深入了解，可以查阅它们的文档，或者找其他的教程。
+如果你只是想做一个简单的网页，有一些简单的 JS 交互，那么 Babel 和 jQuery 就足够了。如果你希望做的是有一定的规模的 web app，那么本教程非常适合你阅读。
 
-教程中提到的大部分技术栈都会用到 React。目前的很多 React 教程都跳过了如何搭建开发环境的部分，直接给一堆配置文件，往往会让人感到很困惑。我采取的方法是一步一步搭建环境，让你彻底理解这些配置都是做什么用的，而不是把这些配置当成一个“黑盒”。
+本教程不会涉及这些技术的具体细节，因为目的只是让你学会使用它们。如果你想深入了解，可以查阅它们的文档，或者找其他的教程。
+
+教程中提到的大部分技术栈都会用到 React。如果你是一个初学者，想学习 React，[create-react-app](https://github.com/facebookincubator/create-react-app) 是一个很好的选择，它可以帮你快速搭建起开发环境，所有的环境都配置好了。例如你刚加入一个使用 React 的团队，希望快速上手，我非常推荐你使用它。不过在本教程中，不会有任何预先配置好的东西，因为我希望你理解每一行配置背后真实发生了什么。
 
 每个章节都有代码示例，可以使用命令 `yarn && yarn start` 或 `npm install && npm start` 来运行。建议按照每章的说明，**一步一步**从零开始写所有的代码。
 
