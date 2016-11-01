@@ -1,6 +1,6 @@
 # 9 - Redux
 
-在本章（应该是目前为止最困难的一章）中，我们将添加 [Redux](http://redux.js.org/) 到我们的应用程序，并将它与 React 结合起来使用。 Redux 负责管理应用程序的状态。它由 **store**，**actions** 和 **reducers** 组成：**store** 是一个表示应用程序状态的 JavaScript 对象，**actions** 表示由用户触发的动作，**reducers** 表示如何处理这些动作。 reducers 将会改变应用程序的状态（store），当状态被修改时，应用程序可能会发生一些改变。 <a href="http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9">这里</a>有一个很好的 Redux 可视化演示示例。
+在本章（应该是目前为止最困难的一章）中，我们将添加 [Redux](http://redux.js.org/) 到我们的应用程序，并将它与 React 结合起来使用。 Redux 负责管理应用程序的状态。它由 **store**，**actions** 和 **reducers** 组成：**store** 是一个表示应用程序状态的 JavaScript 对象，**actions** 表示由用户触发的动作，**reducers** 表示如何处理这些动作。 reducers 将会改变应用程序的状态（store），当状态被修改时，应用程序可能会发生一些改变。[这里](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9)有一个很好的 Redux 可视化演示示例。
 
 为了演示如何以最简单的方式使用 Redux，我们的应用程序将包括一个消息和一个按钮。消息的内容是狗是否已经叫了（初始值是没有叫），按钮用于让狗叫，点击按钮后应该更新消息的内容。
 
