@@ -5,6 +5,7 @@
 - 运行 `yarn add --dev gulp`
 - 运行 `yarn add --dev gulp-babel`
 - 运行 `yarn add --dev babel-preset-latest`
+- 运行 `yarn add --dev del`（执行 `clean` 任务使用的包）
 - 在 `package.json` 中增加一个 `babel` 字段，添加如下代码将使用最新的 Babel 配置：
 
 ```json
@@ -72,7 +73,7 @@ Gulp 本身的 API 很简单。使用 `gulp.task` 定义一系列的任务，使
 然后，定义 5 个任务： `build`， `clean`， `main`， `watch` 和  `default`。
 
 - `build` 任务读取 `src` 下的所有文件，使用 Babel 转换，将转换后的文件写入到 `lib` 下。
-- `clean` 任务用于在每次执行 `build` 之前删除 `lib` 文件夹下的所有内容。这是一个很有用的任务。当你重命名或删除了 `src` 下的一些文件，这个任务可以帮助你清除旧的编译文件。如果你不小心构建失败了，这能确保 `lib` 文件夹与 `src` 文件夹下的内容保持同步，即使你并不知道构建失败了。使用 `del` 删除文件，它遵循 Gulp 的流式处理方式（这是Gulp [推荐](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md)的方式）。运行 `yarn add --dev del` 安装这个包。
+- `clean` 任务用于在每次执行 `build` 之前删除 `lib` 文件夹下的所有内容。这是一个很有用的任务。当你重命名或删除了 `src` 下的一些文件，这个任务可以帮助你清除旧的编译文件。如果你不小心构建失败了，这能确保 `lib` 文件夹与 `src` 文件夹下的内容保持同步，即使你并不知道构建失败了。使用 `del` 删除文件，它遵循 Gulp 的流式处理方式（这是Gulp [推荐](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md)的方式）。
 - `main` 任务与之前章节里提到的  `node .` 是等价的。不过这次我们希望执行 `lib/index.js`。我们已经知道 Node 默认会去找 `index.js` 文件，所以运行 `node lib` 即可（在这里我们定义了一个变量 `libDir`，来保持 DRY）。`require('child_process').exec` 和 `exec` 是 Node 中的原生方法，用于执行 shell 命令。将 `stdout` 的内容转发到 `console.log()` 中，如果报错了，使用 `gulp.task` 的回调函数返回错误。你可能觉得不能彻底理解这部分内容，不用担心，只需要记住一点， 这个任务相当于执行了 `node lib`。
 - `watch` 任务监听文件改动，当有文件内容发生变化时，执行 `main` 任务。
 - 如果你直接从命令行调用 `gulp`，将默认运行 `default` 任务。在这个例子中，我们希望它运行 `watch` 和 `main`（首次执行）。

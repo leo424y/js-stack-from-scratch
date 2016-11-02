@@ -10,6 +10,8 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 <br/>
 
+[![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
+
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
 [![Gulp](/img/gulp.png)](http://gulpjs.com/)
@@ -19,8 +21,6 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 [![Mocha](/img/mocha.png)](https://mochajs.org/)
 [![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
-
-[![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 
 欢迎阅读我的 JavaScript 教程：**从零开始构建 JavaScript 技术栈**
 
