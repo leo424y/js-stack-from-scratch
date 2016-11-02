@@ -51,7 +51,7 @@ Mocha 测试的工作就像一棵树。在这个例子中，`makeBark` 方法会
 
 好，该运行测试了！
 
-- 新建 `test` 任务，它依赖 `gulp-mocha` 插件：
+- 在 `gulpfile.babel.js` 中新建 `test` 任务，它依赖 `gulp-mocha` 插件：
 
 ```javascript
 import mocha from 'gulp-mocha';
