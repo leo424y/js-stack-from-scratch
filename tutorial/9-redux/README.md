@@ -20,6 +20,7 @@ export const makeBark = () => ({
   payload: true,
 });
 ```
+
 这里我们定义了一个 action 类型 `MAKE_BARK` 和一个函数（也称为 *action creator*），它触发一个名为 `makeBark` 的 `MAKE_BARK` action。两者都使用 `export` 导出了，因为在其他文件中需要它们。此操作实现了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 模型，所以它具有 `type` 和 `payload` 属性。
 
 - 在 `reducers` 文件夹中新建 `dog-reducer.js`：

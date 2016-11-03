@@ -95,11 +95,12 @@ import * as Immutable from 'immutable';
 
 **注意**：如果 Flow 在 `node_modules` 文件夹中检测到类型错误，请在 `.flowconfig` 中添加一个`[ignore]` 来忽略特定的包（不要忽略整个 `node_modules` 目录）。看起来像这样
 
-```
+```flowconfig
 [ignore]
 
 .*/node_modules/gulp-flowtype/.*
 ```
+
 在我这的情况是，Atom 编辑器的 `linter-flow` 插件会检测 `node_modules/gulp-flowtype` 目录中的类型错误，针对那些用 `// @flow` 注释过的文件。
 
 现在，你的代码已经通过了代码检查，类型检查和测试的考验了，好样的！

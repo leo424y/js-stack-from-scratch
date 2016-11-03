@@ -12,6 +12,7 @@ macOS 或 Windows 用户可以直接[下载安装文件](https://nodejs.org/en/d
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
+
 你需要大于 6.5.0 的 Node 版本。
 
 `npm` 是 Node 的默认包管理器，不需要手动安装。
@@ -30,7 +31,7 @@ sudo apt-get install -y nodejs
 
 - 在 `package.json` 中增加 `scripts` 字段如下：
 
-```
+```json
 "scripts": {
   "start": "node ."
 }
@@ -41,7 +42,7 @@ sudo apt-get install -y nodejs
 - 运行 `yarn start`，将打印 `Hello world`。
 - 新建一个 `.gitignore` 文件，增加以下内容：
 
-```
+```gitignore
 npm-debug.log
 yarn-error.log
 ```
@@ -51,4 +52,3 @@ yarn-error.log
 下一章：[2 - 包的安装与使用](/tutorial/2-packages)
 
 回到[目录](https://github.com/pd4d10/js-stack-from-scratch)
-

@@ -41,6 +41,7 @@ describe('App State', () => {
   });
 });
 ```
+
 好，现在我们一起分析一下都发生了什么。
 
 首先，注意我们是如何从 `chai` 中导入 `should` 断言样式的。这让我们使用 `mynumber.should.equal(3)` 这样的语法去做断言，很酷。为了能够让 `should` 让任何对象调用，需要所有测试之前运行 `should()`。这些断言中，有些是表达式，如 `mybook.should.be.true`，这会让 ESLint 报错，因此我们在顶部添加了一个 ESLint 注释，用于禁用 `no-unused-expressions` 这个规则。

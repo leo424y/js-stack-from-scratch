@@ -7,6 +7,7 @@
 一条命令里可以安装多个包。这些包都会自动添加到 `package.json` 中。
 
 在 `package.json` 中添加 `eslintConfig` 字段：
+
 ```json
 "eslintConfig": {
   "extends": "airbnb",
@@ -18,7 +19,7 @@
 
 `plugin` 字段用于告诉 ESLint 我们使用了 ES6 中的模块语法。
 
-**注意**：也可以使用根目录下的 `.eslintrc.js` 来代替 `package.json` 中的 `eslintConfig` 字段。跟 Babel 配置类似，我们不希望根目录下有太多文件，但如果你的 ESLint 配置比较复杂，那可以考虑把它单独放在一个文件里。
+**注意**：也可以使用根目录下的 `.eslintrc.js`，`.eslintrc.json` 或 `. eslintrc.yaml` 来代替 `package.json` 中的 `eslintConfig` 字段。跟 Babel 配置类似，我们不希望根目录下有太多文件，但如果你的 ESLint 配置比较复杂，那可以考虑把它单独放在一个文件里。
 
 我们将创建一个 Gulp 任务，用于运行 ESLint。首先需要安装 ESLint 的 Gulp 插件：
 
@@ -111,7 +112,6 @@ gulp.task('build', ['lint', 'clean'], () =>
 - 运行 `yarn start`，现在应该没有任何错误了。
 
 **注意**：本章我们学习了如何在终端中配置 ESLint。在代码构建期间，提交之前就发现潜在的错误是一个很好的功能，你可能希望将这个功能集成到 IDE 里。**不要**使用 IDE 默认的 ESLint 配置，你需要额外配置一下让 IDE 使用 `node_modules` 下的 ESLint 命令（一般是 `node_modules/.bin/eslint`）。这样才会使用我们自己定义的配置。
-
 
 下一章：[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
 

@@ -53,7 +53,6 @@ clientEntryPoint: 'src/client/app.jsx',
 
 现在运行 `yarn start`，打开 `index.html`，可以看见 React 渲染出了 "The dog says: Wah wah, I am Browser Toby"。
 
-
 下一章：[9 - Redux](/tutorial/9-redux)
 
 返回[上一章](/tutorial/7-client-webpack)或[目录](https://github.com/pd4d10/js-stack-from-scratch).

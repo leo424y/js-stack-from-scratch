@@ -25,6 +25,7 @@ import Cat from './dog';
 
 const toby = new Cat('Toby');
 ```
+
 大多数时候，我们会使用与 类/模块 相同的名字。在 Gulp 文件中我们使用 `const babel = require('gulp-babel')`，这是一个反例。
 
 那 `gulpfile.js` 中的那些 `require()` 可以替换成 `import` 吗？最新版本的 Node 支持大部分的 ES6 功能，但不支持 ES6 模块语法。不过幸运的是，可以让 Babel 来帮助 Gulp 做这件事。如果我们将 `gulpfile.js` 重命名为 `gulpfile.babel.js`，Babel 会将 `import` 导入的模块传给 Gulp。

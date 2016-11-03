@@ -86,7 +86,6 @@ Gulp 本身的 API 很简单。使用 `gulp.task` 定义一系列的任务，使
 - 运行 `yarn start`，将会打印 "Hello ES6" 并开始监听文件的更改。你可以试试在 `src/index.js` 中写一些有语法错误的代码，看下 Gulp 是不是报错了。
 - 添加 `/lib/` 到 `.gitignore` 文件中
 
-
 下一章：[4 - 使用 ES6 中的 class](/tutorial/4-es6-syntax-class)
 
 回到[上一章](/tutorial/2-packages)或[目录](https://github.com/pd4d10/js-stack-from-scratch).

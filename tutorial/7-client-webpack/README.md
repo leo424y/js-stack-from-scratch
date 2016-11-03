@@ -37,6 +37,7 @@ document.querySelector('.app').innerText = browserToby.bark();
   "browser": true
 }
 ```
+
 这样可以让 ESLint 知道目前在浏览器环境中，所以 `window` 或 `document` 之类的变量一定是存在的，就不会报变量未声明的错误了。
 
 如果你希望在前端代码中使用一些最新的 ES 功能，比如 `Promise`，需要引入 [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/)。

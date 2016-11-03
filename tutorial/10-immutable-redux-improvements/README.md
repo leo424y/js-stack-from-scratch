@@ -10,7 +10,9 @@
 const obj = { a: 1 };
 obj.a = 2; // Mutates `obj`
 ```
+
 而是这样做：
+
 ```javascript
 const obj = Immutable.Map({ a: 1 });
 obj.set('a', 2); // Returns a new object without mutating `obj`
@@ -35,6 +37,7 @@ obj.set('a', 2); // Returns a new object without mutating `obj`
   ]
 }
 ```
+
 这样 `Map` 和 `List`（我们使用到的两个 Immutable 对象）就不会被 ESLint 视为错误了。这个 JSON 的实际上是被 Yarn/NPM 自动格式化了，所以我们没办法让它更紧凑。
 
 回到 Immutable 的部分：

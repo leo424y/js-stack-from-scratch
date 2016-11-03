@@ -8,9 +8,7 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 目前的章节已经翻译完成，[**欢迎提交 PULL REQUEST**](https://github.com/pd4d10/js-stack-from-scratch/pulls)
 
-<br/>
-
-[![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
+[![Build Status](https://travis-ci.org/pd4d10/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/pd4d10/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
@@ -74,6 +72,7 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 
 - [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
 - [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
+- [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
 
 ## Credits
 

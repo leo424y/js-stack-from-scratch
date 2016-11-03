@@ -29,11 +29,11 @@ const toby = new Dog('Toby');
 
 console.log(toby.bark());
 ```
-你可能注意到了，跟引用第三方包 `color ` 的方式有点不一样，当我们需要引用本地的文件时，在 `require()` 中使用了 `./`。
+
+你可能注意到了，跟引用第三方包 `color` 的方式有点不一样，当我们需要引用本地的文件时，在 `require()` 中使用了 `./`。
 
 - 运行 `yarn start` ，将打印  'Wah wah, I am Toby'。
 - 看一下 `lib` 中编译后的文件长什么样（`const` 都被 `var` 替换了）。
-
 
 下一章：[5 - ES6 模块系统](/tutorial/5-es6-modules-syntax)
 
