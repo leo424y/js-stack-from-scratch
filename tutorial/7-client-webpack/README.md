@@ -188,4 +188,4 @@ gulp.task('clean', () => del([
 
 下一章：[8 - React](/tutorial/8-react)
 
-返回[上一节](/tutorial/6-eslint)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
+返回[上一节](/tutorial/6-eslint)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

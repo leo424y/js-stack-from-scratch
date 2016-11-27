@@ -46,4 +46,4 @@ import { exec } from 'child_process';
 
 下一章：[6 - 代码检查工具 ESLint](/tutorial/6-eslint)
 
-回到[上一章](/tutorial/4-es6-syntax-class)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
+回到[上一章](/tutorial/4-es6-syntax-class)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

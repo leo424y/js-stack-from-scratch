@@ -2,7 +2,7 @@
 
 我们需要检查代码来发现潜在的问题。ESLint 是 ES6 代码检查的首选。在这个例子中，我们不自己配置规则，而是使用 Airbnb 的规则。它依赖了一些插件，首先需要安装它们：
 
-- 运行 `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+- 运行 `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
 
 一条命令里可以安装多个包。这些包都会自动添加到 `package.json` 中。
 
@@ -115,4 +115,4 @@ gulp.task('build', ['lint', 'clean'], () =>
 
 下一章：[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
 
-回到[上一章](/tutorial/5-es6-modules-syntax)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
+回到[上一章](/tutorial/5-es6-modules-syntax)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

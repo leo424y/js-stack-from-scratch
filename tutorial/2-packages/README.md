@@ -27,4 +27,4 @@ Yarn 生成了一个 `yarn.lock` 文件，它应该被提交到 git 仓库，确
 
 下一章：[3 - 使用 Babel 和 Gulp 配置 ES6 开发环境](/tutorial/3-es6-babel-gulp)
 
-回到[上一章](/tutorial/1-node-npm-yarn-package-json)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
+回到[上一章](/tutorial/1-node-npm-yarn-package-json)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

@@ -2,11 +2,7 @@
 
 ## 关于
 
-这里是[从零开始构建 JavaScript 技术栈](https://github.com/verekia/js-stack-from-scratch)的中文翻译版本。本教程**适合刚入门的新人**阅读。
-
-fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://github.com/verekia/js-stack-from-scratch/issues)提问。关于中文翻译的问题可以在[这里](https://github.com/pd4d10/js-stack-from-scratch/pull/1)提问。
-
-目前的章节已经翻译完成，[**欢迎提交 PULL REQUEST**](https://github.com/pd4d10/js-stack-from-scratch/pulls)
+这里是[从零开始构建 JavaScript 技术栈](https://github.com/verekia/js-stack-from-scratch)的中文翻译版本。
 
 [![Build Status](https://travis-ci.org/pd4d10/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/pd4d10/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
 
@@ -73,6 +69,8 @@ fork 不支持 issue，有问题请直接到[主分支的 issue 列表](https://
 - [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
 - [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
 - [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
+- [Русский](https://github.com/UsulPro/js-stack-from-scratch) by [React Theming](https://github.com/sm-react/react-theming)
+- [ไทย](https://github.com/MicroBenz/js-stack-from-scratch) by [MicroBenz](https://github.com/MicroBenz)
 
 ## Credits
 

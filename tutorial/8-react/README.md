@@ -55,4 +55,4 @@ clientEntryPoint: 'src/client/app.jsx',
 
 下一章：[9 - Redux](/tutorial/9-redux)
 
-返回[上一章](/tutorial/7-client-webpack)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
+返回[上一章](/tutorial/7-client-webpack)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

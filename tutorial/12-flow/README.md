@@ -75,7 +75,7 @@ export default Dog;
 
 - 现在可以在 `src` 目录下的每个 `.js` 和 `.jsx` 文件中添加 `// @flow` 注释了，运行 `yarn test` 或 `yarn start`， 在每个 Flow 提示你的地方添加注解。
 
-在 `src/client/component/message.jsx` 文件中，有一种比较违反直觉的情况如下：
+在 `src/client/components/message.jsx` 文件中，有一种比较违反直觉的情况如下：
 
 ```javascript
 const Message = ({ message }: { message: string }) => <div>{message}</div>;
@@ -105,4 +105,4 @@ import * as Immutable from 'immutable';
 
 现在，你的代码已经通过了代码检查，类型检查和测试的考验了，好样的！
 
-回到[上一章](/tutorial/11-testing-mocha-chai-sinon)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
+回到[上一章](/tutorial/11-testing-mocha-chai-sinon)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

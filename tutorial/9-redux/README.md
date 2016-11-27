@@ -158,4 +158,4 @@ export default connect(mapStateToProps)(Message);
 
 下一章：[10 - Immutable JS 和 Redux 的改进方法](/tutorial/10-immutable-redux-improvements)
 
-回到[上一章](/tutorial/8-react)或[目录](https://github.com/pd4d10/js-stack-from-scratch)
+回到[上一章](/tutorial/8-react)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)

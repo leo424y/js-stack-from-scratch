@@ -88,4 +88,4 @@ Gulp 本身的 API 很简单。使用 `gulp.task` 定义一系列的任务，使
 
 下一章：[4 - 使用 ES6 中的 class](/tutorial/4-es6-syntax-class)
 
-回到[上一章](/tutorial/2-packages)或[目录](https://github.com/pd4d10/js-stack-from-scratch).
+回到[上一章](/tutorial/2-packages)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)
