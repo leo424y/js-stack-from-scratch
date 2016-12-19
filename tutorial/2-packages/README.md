@@ -13,7 +13,7 @@
 Yarn 生成了一个 `yarn.lock` 文件，它应该被提交到 git 仓库，确保团队中的每个人都使用相同的版本。如果你使用的是 NPM，那么应该使用 *shrinkwrap*。
 
 - 在 `index.js` 中增加 `const Color = require('color');`
-- 可以这样来使用它：`const redHexa = Color({r: 255, g: 0, b: 0}).hexString();`
+- 可以这样来使用它：`const redHexa = Color({r: 255, g: 0, b: 0}).hex();`
 - 增加 `console.log(redHexa)`。
 - 运行 `yarn start` 应该显示 `#FF0000`。
 
