@@ -1,14 +1,14 @@
 # 8 - React
 
-我们现在要使用 React 来渲染我们的应用程序。
+我們現在要使用 React 來渲染我們的應用程式。
 
-首先安装 React 和 ReactDOM：
+首先安裝 React 和 ReactDOM：
 
-- 运行 `yarn add react react-dom`
+- 執行 `yarn add react react-dom`
 
-这两个包将添加到 `"dependencies"` 而不是 `"devDependencies"` ，因为生产环境的客户端打包需要它们，这跟构建过程需要的包不一样。
+這兩個包將新增到 `"dependencies"` 而不是 `"devDependencies"` ，因為生產環境的客戶端打包需要它們，這跟構建過程需要的包不一樣。
 
-将 `src/client/app.js` 重命名为 `src/client/app.jsx`，然后加入如下代码：
+將 `src/client/app.js` 重新命名為 `src/client/app.jsx`，然後加入如下程式碼：
 
 ```javascript
 import 'babel-polyfill';
@@ -32,15 +32,15 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**注意**：如果您不熟悉 React 或 PropTypes 相关的知识，请先学习 React 的基本知识后再回到本教程。在接下来的章节里会有很多关于 React 的内容，所以你需要先理解它。
+**注意**：如果您不熟悉 React 或 PropTypes 相關的知識，請先學習 React 的基本知識後再回到本教程。在接下來的章節裡會有很多關於 React 的內容，所以你需要先理解它。
 
-在你的 Gulpfile 中修改 `clientEntryPoint` 的值，改成 `.jsx` 扩展名：
+在你的 Gulpfile 中修改 `clientEntryPoint` 的值，改成 `.jsx` 副檔名：
 
 ```javascript
 clientEntryPoint: 'src/client/app.jsx',
 ```
 
-我们使用了 JSX 语法，必须告诉 Babel 需要转换它。首先安装 React Babel preset，这个包告诉 Babel 如何转换 JSX 语法：`yarn add --dev babel-preset-react`。然后修改 `package.json` 中的 `babel` 字段：
+我們使用了 JSX 語法，必須告訴 Babel 需要轉換它。首先安裝 React Babel preset，這個包告訴 Babel 如何轉換 JSX 語法：`yarn add --dev babel-preset-react`。然後修改 `package.json` 中的 `babel` 欄位：
 
 ```json
 "babel": {
@@ -51,8 +51,8 @@ clientEntryPoint: 'src/client/app.jsx',
 },
 ```
 
-现在运行 `yarn start`，打开 `index.html`，可以看见 React 渲染出了 "The dog says: Wah wah, I am Browser Toby"。
+現在執行 `yarn start`，開啟 `index.html`，可以看見 React 渲染出了 "The dog says: Wah wah, I am Browser Toby"。
 
 下一章：[9 - Redux](/tutorial/9-redux)
 
-返回[上一章](/tutorial/7-client-webpack)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)
+返回[上一章](/tutorial/7-client-webpack)或[目錄](https://github.com/pd4d10/js-stack-from-scratch#目錄)

@@ -1,28 +1,28 @@
-# 10 - Immutable JS 和 Redux 的改进方法
+# 10 - Immutable JS 和 Redux 的改進方法
 
 ## Immutable JS
 
-与前一章不同，这一章相当容易，只是对之前的代码稍作改进。
+與前一章不同，這一章相當容易，只是對之前的程式碼稍作改進。
 
-首先向代码库添加 Immutable JS。Immutable 的中文意思是不可变，Immutable 是一个操作 JS 对象而不改变它们的库，不是这样做：
+首先向程式碼庫新增 Immutable JS。Immutable 的中文意思是不可變，Immutable 是一個操作 JS 物件而不改變它們的庫，不是這樣做：
 
 ```javascript
 const obj = { a: 1 };
 obj.a = 2; // Mutates `obj`
 ```
 
-而是这样做：
+而是這樣做：
 
 ```javascript
 const obj = Immutable.Map({ a: 1 });
 obj.set('a', 2); // Returns a new object without mutating `obj`
 ```
 
-这是一种**函数式编程**的范例，它能很好地与 Redux 一起使用。reducer 函数*必须*是纯函数，不能改变作为参数传递的 state，而是返回一个全新的 state 对象。让我们使用 Immutable 来强制做到这一点。
+這是一種**函數語言程式設計**的範例，它能很好地與 Redux 一起使用。reducer 函數*必須*是純函數，不能改變作為參數傳遞的 state，而是返回一個全新的 state 物件。讓我們使用 Immutable 來強制做到這一點。
 
-- 运行 `yarn add immutable`
+- 執行 `yarn add immutable`
 
-我们将使用 `Map`，但 Airbnb 配置的 ESLint 会将其视为一个错误（大写开头的变量必须是一个类）。添加以下代码到 `package.json` 的 `eslintConfig`：
+我們將使用 `Map`，但 Airbnb 配置的 ESLint 會將其視為一個錯誤（大寫開頭的變數必須是一個類）。新增以下程式碼到 `package.json` 的 `eslintConfig`：
 
 ```json
 "rules": {
@@ -38,11 +38,11 @@ obj.set('a', 2); // Returns a new object without mutating `obj`
 }
 ```
 
-这样 `Map` 和 `List`（我们使用到的两个 Immutable 对象）就不会被 ESLint 视为错误了。这个 JSON 的实际上是被 Yarn/NPM 自动格式化了，所以我们没办法让它更紧凑。
+這樣 `Map` 和 `List`（我們使用到的兩個 Immutable 物件）就不會被 ESLint 視為錯誤了。這個 JSON 的實際上是被 Yarn/NPM 自動格式化了，所以我們沒辦法讓它更緊湊。
 
 回到 Immutable 的部分：
 
-修改 `dog-reducer.js` 文件如下：
+修改 `dog-reducer.js` 檔案如下：
 
 ```javascript
 import Immutable from 'immutable';
@@ -64,9 +64,9 @@ const dogReducer = (state = initialState, action) => {
 export default dogReducer;
 ```
 
-初始 state 现在是一个 Immutable Map 了，使用 `set()` 方法生成一个新的 state，这就避免了改变原来的 state 对象。
+初始 state 現在是一個 Immutable Map 了，使用 `set()` 方法生成一個新的 state，這就避免了改變原來的 state 物件。
 
-在 `containers/bark-message.js` 中的 `mapStateToProps` 函数将 `.hasBarked` 替换为 `.get('hasBarked')`：
+在 `containers/bark-message.js` 中的 `mapStateToProps` 函數將 `.hasBarked` 替換為 `.get('hasBarked')`：
 
 ```javascript
 const mapStateToProps = state => ({
@@ -74,21 +74,21 @@ const mapStateToProps = state => ({
 });
 ```
 
-修改后 app 的行为与之前是一样的。
+修改後 app 的行為與之前是一樣的。
 
-**注意**：如果 Babel 提示 Immutable 超过了 100KB，在 `package.json` 中的 `babel` 字段添加 `"compact": false`。
+**注意**：如果 Babel 提示 Immutable 超過了 100KB，在 `package.json` 中的 `babel` 欄位新增 `"compact": false`。
 
-从上面的代码片段中可以看出，我们的 state 对象 `dog` 属性仍然不是不可变的。这没问题，但如果你只想操作不可变对象，可以安装 `redux-immutable` 包来替换 Redux 的 `combineReducers` 函数。
+從上面的程式碼片段中可以看出，我們的 state 物件 `dog` 屬性仍然不是不可變的。這沒問題，但如果你只想操作不可變物件，可以安裝 `redux-immutable` 包來替換 Redux 的 `combineReducers` 函數。
 
-**可选步骤**：
+**可選步驟**：
 
-- 运行 `yarn add redux-immutable`
-- 把 `app.jsx` 中的 `combineReducers` 函数替换为从 `redux-immutable` 中导出的。
-- 将 `bark-message.js` 中的 `state.dog.get('hasBarked')` 替换为 `state.getIn(['dog', 'hasBarked'])`。
+- 執行 `yarn add redux-immutable`
+- 把 `app.jsx` 中的 `combineReducers` 函數替換為從 `redux-immutable` 中匯出的。
+- 將 `bark-message.js` 中的 `state.dog.get('hasBarked')` 替換為 `state.getIn(['dog', 'hasBarked'])`。
 
 ## Redux Actions
 
-当你添加越来越多的 action 后，你会发现自己写了很多重复代码。 `redux-actions` 这个包有助于减少重复的样板代码，你可以以更紧凑的方式重写 `dog-actions.js` 文件：
+當你新增越來越多的 action 後，你會發現自己寫了很多重複程式碼。 `redux-actions` 這個包有助於減少重複的樣板程式碼，你可以以更緊湊的方式重寫 `dog-actions.js` 檔案：
 
 ```javascript
 import { createAction } from 'redux-actions';
@@ -97,10 +97,10 @@ export const MAKE_BARK = 'MAKE_BARK';
 export const makeBark = createAction(MAKE_BARK, () => true);
 ```
 
-`redux-actions` 实现了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 这个模型，就跟我们之前的代码一样，所以它能够无缝地集成在我们的 app 中。
+`redux-actions` 實現了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 這個模型，就跟我們之前的程式碼一樣，所以它能夠無縫地整合在我們的 app 中。
 
-- 不要忘记运行 `yarn add redux-actions`
+- 不要忘記執行 `yarn add redux-actions`
 
-下一章：[11 - 使用 Mocha, Chai 和 Sinon 进行测试](/tutorial/11-testing-mocha-chai-sinon)
+下一章：[11 - 使用 Mocha, Chai 和 Sinon 進行測試](/tutorial/11-testing-mocha-chai-sinon)
 
-回到[上一章](/tutorial/9-redux)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)
+回到[上一章](/tutorial/9-redux)或[目錄](https://github.com/pd4d10/js-stack-from-scratch#目錄)

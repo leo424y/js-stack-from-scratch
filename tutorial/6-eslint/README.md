@@ -1,12 +1,12 @@
-# 6 - 代码检查工具 ESLint
+# 6 - 程式碼檢查工具 ESLint
 
-我们需要检查代码来发现潜在的问题。ESLint 是 ES6 代码检查的首选。在这个例子中，我们不自己配置规则，而是使用 Airbnb 的规则。它依赖了一些插件，首先需要安装它们：
+我們需要檢查程式碼來發現潛在的問題。ESLint 是 ES6 程式碼檢查的首選。在這個例子中，我們不自己配置規則，而是使用 Airbnb 的規則。它依賴了一些外掛，首先需要安裝它們：
 
-- 运行 `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
+- 執行 `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
 
-一条命令里可以安装多个包。这些包都会自动添加到 `package.json` 中。
+一條命令裡可以安裝多個包。這些包都會自動新增到 `package.json` 中。
 
-在 `package.json` 中添加 `eslintConfig` 字段：
+在 `package.json` 中新增 `eslintConfig` 欄位：
 
 ```json
 "eslintConfig": {
@@ -17,15 +17,15 @@
 },
 ```
 
-`plugin` 字段用于告诉 ESLint 我们使用了 ES6 中的模块语法。
+`plugin` 欄位用於告訴 ESLint 我們使用了 ES6 中的模組語法。
 
-**注意**：也可以使用根目录下的 `.eslintrc.js`，`.eslintrc.json` 或 `. eslintrc.yaml` 来代替 `package.json` 中的 `eslintConfig` 字段。跟 Babel 配置类似，我们不希望根目录下有太多文件，但如果你的 ESLint 配置比较复杂，那可以考虑把它单独放在一个文件里。
+**注意**：也可以使用根目錄下的 `.eslintrc.js`，`.eslintrc.json` 或 `. eslintrc.yaml` 來代替 `package.json` 中的 `eslintConfig` 欄位。跟 Babel 配置類似，我們不希望根目錄下有太多檔案，但如果你的 ESLint 配置比較複雜，那可以考慮把它單獨放在一個檔案裡。
 
-我们将创建一个 Gulp 任务，用于运行 ESLint。首先需要安装 ESLint 的 Gulp 插件：
+我們將建立一個 Gulp 任務，用於執行 ESLint。首先需要安裝 ESLint 的 Gulp 外掛：
 
-- 运行 `yarn add --dev gulp-eslint`
+- 執行 `yarn add --dev gulp-eslint`
 
-将以下任务添加到 `gulpfile.babel.js` 中：
+將以下任務新增到 `gulpfile.babel.js` 中：
 
 ```javascript
 import eslint from 'gulp-eslint';
@@ -49,9 +49,9 @@ gulp.task('lint', () => {
 });
 ```
 
-在这个任务中，将 `gulpfile.babel.js` 通过 `src` 包括进来了。
+在這個任務中，將 `gulpfile.babel.js` 通過 `src` 包括進來了。
 
-为 `build` 任务添加一个依赖 `lint`：
+為 `build` 任務新增一個依賴 `lint`：
 
 ```javascript
 gulp.task('build', ['lint', 'clean'], () => {
@@ -59,17 +59,17 @@ gulp.task('build', ['lint', 'clean'], () => {
 });
 ```
 
-- 运行 `yarn start`，此时会报一堆代码检查错误，以及一个关于 `console.log()` 的警告。
+- 執行 `yarn start`，此時會報一堆程式碼檢查錯誤，以及一個關於 `console.log()` 的警告。
 
-其中一个错误是 `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`。这其实不是我们想要的，因为 ESLint 不知道哪些文件是构建过程的一部分，哪些不是，所以我们需要写一些注释来告诉他。在 `gulpfile.babel.js` 的顶部添加：
+其中一個錯誤是 `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`。這其實不是我們想要的，因為 ESLint 不知道哪些檔案是構建過程的一部分，哪些不是，所以我們需要寫一些註釋來告訴他。在 `gulpfile.babel.js` 的頂部新增：
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
-这样 ESLint 就不会对这个文件使用 `import/no-extraneous-dependencies` 规则了。
+這樣 ESLint 就不會對這個檔案使用 `import/no-extraneous-dependencies` 規則了。
 
-还有一个错误：`Unexpected block statement surrounding arrow body (arrow-body-style)`。ESLint 告诉我们有更好的写法：
+還有一個錯誤：`Unexpected block statement surrounding arrow body (arrow-body-style)`。ESLint 告訴我們有更好的寫法：
 
 ```javascript
 () => {
@@ -77,15 +77,15 @@ gulp.task('build', ['lint', 'clean'], () => {
 }
 ```
 
-应该写成：
+應該寫成：
 
 ```javascript
 () => 1
 ```
 
-在 ES6 中，如果函数体中只包含 return 语句时，可以去掉大括号，return 语句和分号。
+在 ES6 中，如果函數體中只包含 return 語句時，可以去掉大括號，return 語句和分號。
 
-相应的我们可以更新 Gulp 文件了：
+相應的我們可以更新 Gulp 檔案了：
 
 ```javascript
 gulp.task('lint', () =>
@@ -107,12 +107,12 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
-最后一个问题是关于 `console.log()` 的。 `console.log()` 是我们预期的结果，应该告诉 ESLint 不要检查这个规则。你可能已经猜到了，与之前类似，将 `/* eslint-disable no-console */` 添加到 `index.js` 即可。
+最後一個問題是關於 `console.log()` 的。 `console.log()` 是我們預期的結果，應該告訴 ESLint 不要檢查這個規則。你可能已經猜到了，與之前類似，將 `/* eslint-disable no-console */` 新增到 `index.js` 即可。
 
-- 运行 `yarn start`，现在应该没有任何错误了。
+- 執行 `yarn start`，現在應該沒有任何錯誤了。
 
-**注意**：本章我们学习了如何在终端中配置 ESLint。在代码构建期间，提交之前就发现潜在的错误是一个很好的功能，你可能希望将这个功能集成到 IDE 里。**不要**使用 IDE 默认的 ESLint 配置，你需要额外配置一下让 IDE 使用 `node_modules` 下的 ESLint 命令（一般是 `node_modules/.bin/eslint`）。这样才会使用我们自己定义的配置。
+**注意**：本章我們學習瞭如何在終端中配置 ESLint。在程式碼構建期間，提交之前就發現潛在的錯誤是一個很好的功能，你可能希望將這個功能整合到 IDE 裡。**不要**使用 IDE 預設的 ESLint 配置，你需要額外配置一下讓 IDE 使用 `node_modules` 下的 ESLint 命令（一般是 `node_modules/.bin/eslint`）。這樣才會使用我們自己定義的配置。
 
 下一章：[7 - 前端打包工具 Webpack](/tutorial/7-client-webpack)
 
-回到[上一章](/tutorial/5-es6-modules-syntax)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)
+回到[上一章](/tutorial/5-es6-modules-syntax)或[目錄](https://github.com/pd4d10/js-stack-from-scratch#目錄)

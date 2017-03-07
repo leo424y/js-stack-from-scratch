@@ -1,14 +1,14 @@
 # 9 - Redux
 
-在本章（应该是目前为止最困难的一章）中，我们将添加 [Redux](http://redux.js.org/) 到我们的应用程序，并将它与 React 结合起来使用。 Redux 负责管理应用程序的状态。它由 **store**，**actions** 和 **reducers** 组成：**store** 是一个表示应用程序状态的 JavaScript 对象，**actions** 表示由用户触发的动作，**reducers** 表示如何处理这些动作。 reducers 将会改变应用程序的状态（store），当状态被修改时，应用程序可能会发生一些改变。[这里](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9)有一个很好的 Redux 可视化演示示例。
+在本章（應該是目前為止最困難的一章）中，我們將新增 [Redux](http://redux.js.org/) 到我們的應用程式，並將它與 React 結合起來使用。 Redux 負責管理應用程式的狀態。它由 **store**，**actions** 和 **reducers** 組成：**store** 是一個表示應用程式狀態的 JavaScript 物件，**actions** 表示由使用者觸發的動作，**reducers** 表示如何處理這些動作。 reducers 將會改變應用程式的狀態（store），當狀態被修改時，應用程式可能會發生一些改變。[這裡](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9)有一個很好的 Redux 視覺化演示示例。
 
-为了演示如何以最简单的方式使用 Redux，我们的应用程序将包括一个消息和一个按钮。消息的内容是狗是否已经叫了（初始值是没有叫），按钮用于让狗叫，点击按钮后应该更新消息的内容。
+為了演示如何以最簡單的方式使用 Redux，我們的應用程式將包括一個訊息和一個按鈕。訊息的內容是狗是否已經叫了（初始值是沒有叫），按鈕用於讓狗叫，點選按鈕後應該更新訊息的內容。
 
-需要两个包，`redux` 和 `react-redux`。
+需要兩個包，`redux` 和 `react-redux`。
 
-- 运行 `yarn add redux react-redux`
+- 執行 `yarn add redux react-redux`
 
-新建两个文件夹：`src/client/actions` 和 `src/client/reducers`
+新建兩個資料夾：`src/client/actions` 和 `src/client/reducers`
 
 - 在 `actions` 中新建 `dog-actions.js`：
 
@@ -21,9 +21,9 @@ export const makeBark = () => ({
 });
 ```
 
-这里我们定义了一个 action 类型 `MAKE_BARK` 和一个函数（也称为 *action creator*），它触发一个名为 `makeBark` 的 `MAKE_BARK` action。两者都使用 `export` 导出了，因为在其他文件中需要它们。此操作实现了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 模型，所以它具有 `type` 和 `payload` 属性。
+這裡我們定義了一個 action 類型 `MAKE_BARK` 和一個函數（也稱為 *action creator*），它觸發一個名為 `makeBark` 的 `MAKE_BARK` action。兩者都使用 `export` 匯出了，因為在其他檔案中需要它們。此操作實現了 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) 模型，所以它具有 `type` 和 `payload` 屬性。
 
-- 在 `reducers` 文件夹中新建 `dog-reducer.js`：
+- 在 `reducers` 資料夾中新建 `dog-reducer.js`：
 
 ```javascript
 import { MAKE_BARK } from '../actions/dog-actions';
@@ -44,9 +44,9 @@ const dogReducer = (state = initialState, action) => {
 export default dogReducer;
 ```
 
-这里我们定义了应用程序的初始状态 `initialState` 和 `dogReducer`。`initialState` 是一个 `hasBarked` 属性为 `false` 的 JavaScript 对象，`dogReducer` 是根据 action 改变 state 的函数。在这个函数中不能直接修改 state，而应该返回一个新的 state。
+這裡我們定義了應用程式的初始狀態 `initialState` 和 `dogReducer`。`initialState` 是一個 `hasBarked` 屬性為 `false` 的 JavaScript 物件，`dogReducer` 是根據 action 改變 state 的函數。在這個函數中不能直接修改 state，而應該返回一個新的 state。
 
-- 修改 `app.jsx` 创建一个 *store*，替换成以下内容：
+- 修改 `app.jsx` 建立一個 *store*，替換成以下內容：
 
 ```javascript
 import React from 'react';
@@ -72,20 +72,20 @@ ReactDOM.render(
 );
 ```
 
-可以看到，store 是由一个叫 `createStore` 的函数生成的。通过使用 `combineReducers` 函数将所有 reducer 结合起来传给 `createStore`。每个 reducer 都可以重新命名，在这里将其命名为 `dog`。
+可以看到，store 是由一個叫 `createStore` 的函數生成的。通過使用 `combineReducers` 函數將所有 reducer 結合起來傳給 `createStore`。每個 reducer 都可以重新命名，在這裡將其命名為 `dog`。
 
-这是 Redux 的部分。
+這是 Redux 的部分。
 
-现在我们将使用 `react-redux` 将 Redux 和 React 结合起来。为了将我们的 store 传给 React，需要将整个 app 用 `<Provider>` 组件包裹起来。它只有能有一个子组件，所以我们用一个 `<div>` 将我们的两个组件 `BarkMessage` 和 `BarkButton` 再包了一层。
+現在我們將使用 `react-redux` 將 Redux 和 React 結合起來。為了將我們的 store 傳給 React，需要將整個 app 用 `<Provider>` 元件包裹起來。它只有能有一個子元件，所以我們用一個 `<div>` 將我們的兩個元件 `BarkMessage` 和 `BarkButton` 再包了一層。
 
-可以看到，`BarkMessage` 和 `BarkButton` 是从 `containers` 文件夹中导入的。现在我们将介绍 **展示组件 **和 **容器组件** 的概念。
+可以看到，`BarkMessage` 和 `BarkButton` 是從 `containers` 資料夾中匯入的。現在我們將介紹 **展示元件 **和 **容器元件** 的概念。
 
-*展示组件* 是 *笨拙的* React 组件，它们无法知道任何的 Redux 状态。*容器组件* 是 *聪明的* 组件，它能获取 Redux 的状态，我们通过使用 `connect` 方法将这些状态传给 *展示组件*。
+*展示元件* 是 *笨拙的* React 元件，它們無法知道任何的 Redux 狀態。*容器元件* 是 *聰明的* 元件，它能獲取 Redux 的狀態，我們通過使用 `connect` 方法將這些狀態傳給 *展示元件*。
 
-译者注：关于容器组件（Smart/Container Components）和展示组件（Dumb/Presentational Components）的可能有不同的名称，可以查看 Redux 中文文档的[相关章节](http://cn.redux.js.org/docs/basics/UsageWithReact.html)。
+譯者注：關於容器元件（Smart/Container Components）和展示元件（Dumb/Presentational Components）的可能有不同的名稱，可以檢視 Redux 中文文件的[相關章節](http://cn.redux.js.org/docs/basics/UsageWithReact.html)。
 
-- 新建两个文件夹 `src/client/components` 和 `src/client/containers`
-- 在 `components` 中新建以下文件：
+- 新建兩個資料夾 `src/client/components` 和 `src/client/containers`
+- 在 `components` 中新建以下檔案：
 
 **button.jsx**
 
@@ -116,11 +116,11 @@ Message.propTypes = {
 export default Message;
 ```
 
-这些都是**展示组件**的例子，他们并没有跟应用程序的 state 关联起来，而是根据传入的 **props** 来展示内容。`button.jsx` 和 `message.jsx` 有一点区别，`Button` 的 props 里有一个 **action**，绑定在 `onClick` 事件上。在应用程序的上下文中，`Button` 标签不会改变（因为它没有绑定任何 state），但是 `Message` 组件将反映我们的应用程序的状态（绑定了 `message` 这个 state），并将根据状态而变化。
+這些都是**展示元件**的例子，他們並沒有跟應用程式的 state 關聯起來，而是根據傳入的 **props** 來展示內容。`button.jsx` 和 `message.jsx` 有一點區別，`Button` 的 props 裡有一個 **action**，繫結在 `onClick` 事件上。在應用程式的上下文中，`Button` 標籤不會改變（因為它沒有繫結任何 state），但是 `Message` 元件將反映我們的應用程式的狀態（繫結了 `message` 這個 state），並將根據狀態而變化。
 
-同样，*展示组件*不会知道关于 Redux **actions** 或 **state** 的任何信息，所以我们需要新建一个**容器组件**将 *动作*（actions） 和 *数据*（data）传给它们。
+同樣，*展示元件*不會知道關於 Redux **actions** 或 **state** 的任何資訊，所以我們需要新建一個**容器元件**將 *動作*（actions） 和 *資料*（data）傳給它們。
 
-- 在 `containers` 中新建以下文件：
+- 在 `containers` 中新建以下檔案：
 
 **bark-button.js**
 
@@ -150,12 +150,12 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Message);
 ```
 
-在 `BarkButton` 中， 我们将 `Button` 组件和 `makeBark` 这个 action 以及 Redux 中的 `dispatch` 方法关联起来，将 `BarkMessage` 组件和 app 状态中的 `Message` 关联起来。当状态改变的时候，`Message` 组件会自动重新渲染（因为它的 props `message` 改变了）。这些操作都是由 `react-redux` 中的 `connect` 方法完成的。
+在 `BarkButton` 中， 我們將 `Button` 元件和 `makeBark` 這個 action 以及 Redux 中的 `dispatch` 方法關聯起來，將 `BarkMessage` 元件和 app 狀態中的 `Message` 關聯起來。當狀態改變的時候，`Message` 元件會自動重新渲染（因為它的 props `message` 改變了）。這些操作都是由 `react-redux` 中的 `connect` 方法完成的。
 
-- 现在可以执行 `yarn start` ，并打开 `index.html` 了。可以看到 "The dog did not bark" 的消息以及一个按钮。点击按钮后消息会变成 "The dog barked"。
+- 現在可以執行 `yarn start` ，並開啟 `index.html` 了。可以看到 "The dog did not bark" 的訊息以及一個按鈕。點選按鈕後訊息會變成 "The dog barked"。
 
-译者注：本章概念比较多，可能不太容易理解，如果你希望深入地学习 Redux，请查看 [Redux 中文文档](http://cn.redux.js.org/)
+譯者注：本章概念比較多，可能不太容易理解，如果你希望深入地學習 Redux，請檢視 [Redux 中文文件](http://cn.redux.js.org/)
 
-下一章：[10 - Immutable JS 和 Redux 的改进方法](/tutorial/10-immutable-redux-improvements)
+下一章：[10 - Immutable JS 和 Redux 的改進方法](/tutorial/10-immutable-redux-improvements)
 
-回到[上一章](/tutorial/8-react)或[目录](https://github.com/pd4d10/js-stack-from-scratch#目录)
+回到[上一章](/tutorial/8-react)或[目錄](https://github.com/pd4d10/js-stack-from-scratch#目錄)
